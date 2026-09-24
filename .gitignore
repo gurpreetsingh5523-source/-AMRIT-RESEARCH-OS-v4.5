@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Database files
+*.db
+*.sqlite3
+data/projects/*/memory.db
+data/health_graph.db
+data/amrit_knowledge.db
+data/amrit_memory.db
+data/lims.db
+
+# Vector store binaries
+*.tvim
+data/vector_store/
+
+# Logs and debug
+logs/*.log
+*.log
+server_stdout.log
+data/self_heal/backups/
+
+# Reports
+reports/pdf/*
+reports/json/*
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
