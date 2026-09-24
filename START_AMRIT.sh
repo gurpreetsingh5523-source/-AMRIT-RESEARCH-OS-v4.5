@@ -1,11 +1,11 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════
-#  AMRIT RESEARCH OS v4.5 — ਚਲਾਉਣ ਲਈ ਇਹ ਫਾਈਲ
+#  AMRIT RESEARCH OS v5.0 — ਚਲਾਉਣ ਲਈ ਇਹ ਫਾਈਲ
 #  ਵਰਤੋਂ:  bash START_AMRIT.sh
 # ═══════════════════════════════════════════════════════
 
 echo "╔══════════════════════════════════════════╗"
-echo "║   AMRIT RESEARCH OS v4.5 — Starting       ║"
+echo "║   AMRIT RESEARCH OS v5.0 — Starting       ║"
 echo "╚══════════════════════════════════════════╝"
 
 # 1. Check Python
@@ -54,4 +54,4 @@ echo ""
 kill $(lsof -ti:8000) 2>/dev/null
 sleep 1
 
-python3 server.py
+PYTHONUNBUFFERED=1 .venv/bin/python -u server.py

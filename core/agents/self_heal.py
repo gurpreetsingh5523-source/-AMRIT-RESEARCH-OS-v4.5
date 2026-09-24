@@ -183,7 +183,7 @@ class SelfHealingAgent:
     def _iter_py_files(self):
         for p in self.root.rglob("*.py"):
             parts = set(p.parts)
-            if ".git" in parts or "__pycache__" in parts:
+            if ".git" in parts or "__pycache__" in parts or "data" in parts or "backups" in parts or ".venv" in parts or "venv" in parts or "env" in parts or "nam-toon-studio" in parts or "node_modules" in parts:
                 continue
             yield p
 
