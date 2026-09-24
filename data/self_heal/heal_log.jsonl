@@ -26,3 +26,159 @@
 {"ts": "2026-06-15T21:07:13", "action": "survival_mode", "ok": true, "broken": 0}
 {"ts": "2026-06-15T21:07:13", "action": "self_check", "healthy": true, "broken": 0}
 {"ts": "2026-06-15T21:07:13", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T20:35:24", "action": "self_check", "healthy": false, "broken": 3}
+{"ts": "2026-07-09T20:35:58", "action": "self_check", "healthy": false, "broken": 3}
+{"ts": "2026-07-09T20:36:04", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/quantum_biology_simulator.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:36:33", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/expanded_carrier_screening.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:36:44", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-07-09T20:37:33", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-07-09T20:37:40", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/quantum_biology_simulator.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:38:07", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-07-09T20:38:14", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/quantum_biology_simulator.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:38:28", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-07-09T20:38:35", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/quantum_biology_simulator.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:38:41", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-07-09T20:39:09", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-07-09T20:39:15", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/expanded_carrier_screening.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:39:23", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-07-09T20:39:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "core/medical/quantum_biology_simulator.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-07-09T20:39:30", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T20:39:44", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T20:39:44", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T20:40:16", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T20:40:16", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T20:41:47", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T20:41:47", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T20:49:39", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T20:49:39", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T21:04:50", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T21:04:50", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T21:10:00", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T21:10:00", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T21:16:32", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T21:16:32", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T21:20:47", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T21:20:47", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T21:27:14", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T21:27:14", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-07-09T21:32:20", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-07-09T21:32:20", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-08-08T11:57:02", "action": "self_check", "healthy": false, "broken": 13}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/09_animation_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/17_perception_learning_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/20_ultimate_master_builder.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/13_final_data_prep.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/08_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/12_story_transformer.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/22_voice_adaption_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/21_character_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/03_audio_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/16_master_story.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/core/08_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:02", "action": "survival_mode", "ok": true, "broken": 13}
+{"ts": "2026-08-08T11:57:24", "action": "self_check", "healthy": false, "broken": 13}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/09_animation_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/17_perception_learning_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/20_ultimate_master_builder.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/13_final_data_prep.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/08_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/12_story_transformer.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/22_voice_adaption_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/21_character_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/03_audio_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/16_master_story.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/core/08_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:57:24", "action": "survival_mode", "ok": true, "broken": 13}
+{"ts": "2026-08-08T11:58:03", "action": "self_check", "healthy": false, "broken": 13}
+{"ts": "2026-08-08T11:58:20", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/09_animation_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115820__nam-toon-studio__Core__09_animation_node.py"}
+{"ts": "2026-08-08T11:58:27", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/17_perception_learning_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115827__nam-toon-studio__Core__17_perception_learning_node.py"}
+{"ts": "2026-08-08T11:58:41", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/20_ultimate_master_builder.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115841__nam-toon-studio__Core__20_ultimate_master_builder.py"}
+{"ts": "2026-08-08T11:58:48", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/13_final_data_prep.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115848__nam-toon-studio__Core__13_final_data_prep.py"}
+{"ts": "2026-08-08T11:59:03", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T11:59:13", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/08_synthesis_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115913__nam-toon-studio__Core__08_synthesis_node.py"}
+{"ts": "2026-08-08T11:59:21", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/12_story_transformer.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115921__nam-toon-studio__Core__12_story_transformer.py"}
+{"ts": "2026-08-08T11:59:30", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/22_voice_adaption_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115930__nam-toon-studio__Core__22_voice_adaption_node.py"}
+{"ts": "2026-08-08T11:59:39", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/21_character_synthesis_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115939__nam-toon-studio__Core__21_character_synthesis_node.py"}
+{"ts": "2026-08-08T11:59:50", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/03_audio_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_115950__nam-toon-studio__Core__03_audio_node.py"}
+{"ts": "2026-08-08T12:00:44", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-08-08T12:01:10", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:11", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-08-08T12:02:11", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:11", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:11", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/16_master_story.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:11", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/core/08_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:11", "action": "survival_mode", "ok": true, "broken": 4}
+{"ts": "2026-08-08T12:02:36", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-08-08T12:02:36", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:36", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:36", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/16_master_story.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:36", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/core/08_synthesis_node.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:02:36", "action": "survival_mode", "ok": true, "broken": 4}
+{"ts": "2026-08-08T12:03:37", "action": "self_check", "healthy": false, "broken": 4}
+{"ts": "2026-08-08T12:03:56", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:04:23", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:04:34", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/16_master_story.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_120434__nam-toon-studio__Core__16_master_story.py"}
+{"ts": "2026-08-08T12:04:49", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/core/08_synthesis_node.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_120449__nam-toon-studio__Core__core__08_synthesis_node.py"}
+{"ts": "2026-08-08T12:04:49", "action": "survival_mode", "ok": true, "broken": 4}
+{"ts": "2026-08-08T12:05:15", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T12:05:36", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T12:05:51", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:06:17", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:06:17", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T12:06:19", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T12:06:48", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:07:21", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:07:21", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T12:37:53", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T12:38:19", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:38:44", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:38:44", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T12:38:46", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T12:39:04", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:39:29", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T12:39:29", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T13:22:42", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T13:23:05", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T13:23:30", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T13:23:30", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T13:23:32", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T13:23:48", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T13:24:11", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T13:24:11", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T14:06:51", "action": "self_check", "healthy": false, "broken": 2}
+{"ts": "2026-08-08T14:07:01", "action": "heal_exception", "ok": true, "kind": "code", "file": "nam-toon-studio/Core/10_visualization_stable.py", "attempt": 1, "backup": "data/self_heal/backups/20260808_140701__nam-toon-studio__Core__10_visualization_stable.py"}
+{"ts": "2026-08-08T14:07:21", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:07:21", "action": "survival_mode", "ok": true, "broken": 2}
+{"ts": "2026-08-08T14:07:22", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:07:34", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:07:34", "action": "survival_mode", "ok": true, "broken": 1}
+{"ts": "2026-08-08T14:23:45", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:24:07", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:24:07", "action": "survival_mode", "ok": true, "broken": 1}
+{"ts": "2026-08-08T14:24:08", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:24:25", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:24:25", "action": "survival_mode", "ok": true, "broken": 1}
+{"ts": "2026-08-08T14:25:30", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:25:34", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:25:34", "action": "survival_mode", "ok": true, "broken": 1}
+{"ts": "2026-08-08T14:25:35", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:25:46", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:25:46", "action": "survival_mode", "ok": true, "broken": 1}
+{"ts": "2026-08-08T14:26:18", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:28:10", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:28:25", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-08-08T14:28:25", "action": "heal_exception", "ok": false, "kind": "code", "file": "nam-toon-studio/Core/visualization_imagemagick.py", "reason": "no valid compiling patch produced"}
+{"ts": "2026-08-08T14:28:25", "action": "survival_mode", "ok": true, "broken": 1}
+{"ts": "2026-08-08T14:28:26", "action": "self_check", "healthy": false, "broken": 1}
+{"ts": "2026-08-08T14:28:37", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-08-08T14:28:37", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-08-08T14:28:37", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-08-08T14:28:37", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-08-08T14:48:31", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-08-08T14:48:31", "action": "survival_mode", "ok": true, "broken": 0}
+{"ts": "2026-08-08T14:48:32", "action": "self_check", "healthy": true, "broken": 0}
+{"ts": "2026-08-08T14:48:32", "action": "survival_mode", "ok": true, "broken": 0}

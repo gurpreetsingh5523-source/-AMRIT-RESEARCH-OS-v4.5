@@ -61,6 +61,13 @@ class OllamaEmbedder:
 
     def embed(self, text: str) -> Optional[np.ndarray]:
         """Single text → 768-dim float32 vector."""
+        # Fail fast check if Ollama is unreachable
+        try:
+            with urllib.request.urlopen(f"{OLLAMA_BASE}/api/tags", timeout=1) as r:
+                pass
+        except Exception:
+            return None
+
         payload = json.dumps({
             "model": self.model,
             "prompt": text[:2000],  # truncate long texts

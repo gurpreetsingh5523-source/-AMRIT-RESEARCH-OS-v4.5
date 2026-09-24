@@ -369,6 +369,7 @@ Return ONLY valid JSON, no explanation:
             (["report", "pdf", "ਰਿਪੋਰਟ ਬਣਾਓ", "generate"], "generate_report"),
             (["send", "ਭੇਜੋ", "dispatch", "email", "medical center"], "dispatch_report"),
             (["alert", "ਅਲਰਟ", "warning", "critical"], "show_alerts"),
+            (["register", "intake", "ਰਜਿਸਟਰ", "ਮਰੀਜ਼ ਰਜਿਸਟਰ"], "patient_intake"),
             (["patient", "ਮਰੀਜ਼", "status", "pipeline"], "patient_status"),
             (["research", "ਖੋਜ", "study", "paper", "arxiv"], "research_query"),
             (["system", "ਸਿਸਟਮ", "health", "ollama", "status"], "system_status"),
@@ -398,6 +399,7 @@ class CommandRouter:
         "dispatch_report": "ਰਿਪੋਰਟ ਮੈਡੀਕਲ ਸੈਂਟਰ ਨੂੰ ਭੇਜ ਰਿਹਾ ਹਾਂ।",
         "show_alerts":     "ਐਕਟਿਵ ਅਲਰਟ ਦਿਖਾ ਰਿਹਾ ਹਾਂ।",
         "patient_status":  "ਮਰੀਜ਼ ਦੀ ਸਥਿਤੀ ਚੈੱਕ ਕਰ ਰਿਹਾ ਹਾਂ।",
+        "patient_intake":  "ਮਰੀਜ਼ ਦੀ ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਕਰ ਰਿਹਾ ਹਾਂ।",
         "research_query":  "ਖੋਜ ਕਰ ਰਿਹਾ ਹਾਂ।",
         "system_status":   "ਸਿਸਟਮ ਸਥਿਤੀ ਚੈੱਕ ਕਰ ਰਿਹਾ ਹਾਂ।",
         "stop":            "AMRIT Voice Mode ਬੰਦ ਕਰ ਰਿਹਾ ਹਾਂ। ਧੰਨਵਾਦ।",
@@ -449,11 +451,28 @@ class CommandRouter:
             query = intent.get("query", ctx.get("query", ""))
             result.update(self._research(query))
 
+        elif action == "patient_intake":
+            query = intent.get("query", ctx.get("query", ""))
+            result.update(self._run_patient_intake(query))
+
         elif action == "stop":
             result["stop_voice"] = True
             result["success"]    = True
 
         return result
+
+    def _run_patient_intake(self, query: str) -> dict:
+        if not query:
+            return {"spoken_response": "ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ ਮਿਲਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਮਰੀਜ਼ ਦਾ ਨਾਮ ਅਤੇ ਪਤਾ ਦੱਸੋ।", "success": False}
+        try:
+            from core.medical.patient_intake import PatientIntake
+            pi = PatientIntake()
+            parsed = pi.parse_voice_intake(query)
+            record = pi.register_patient(parsed)
+            spoken = f"ਮਰੀਜ਼ {record['name']} ਸਫ਼ਲਤਾਪੂਰਵਕ ਰਜਿਸਟਰ ਹੋ ਗਏ ਹਨ। ਪਤਾ: {record['address']}, ਫ਼ੋਨ: {record['emergency_phone']}।"
+            return {"patient_record": record, "spoken_response": spoken, "success": True}
+        except Exception as e:
+            return {"spoken_response": f"ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਵਿੱਚ ਗਲਤੀ: {str(e)[:50]}", "success": False}
 
     def _run_dna_analysis(self, ctx: dict) -> dict:
         seq = ctx.get("dna_sequence", "")

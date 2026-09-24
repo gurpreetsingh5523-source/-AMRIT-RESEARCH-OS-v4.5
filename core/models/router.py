@@ -22,23 +22,21 @@ Task categories -> preferred models (first installed one wins):
 from core.ai.ollama_client import OllamaClient
 
 
-# Ordered preference lists. The router picks the FIRST model that is
-# actually installed; otherwise it falls back to `default_model`.
 TASK_PREFERENCES = {
-    "deep_reasoning": ["qwen3:14b", "qwen3:8b", "deepseek-r1", "deepseek-coder-v2:latest"],
-    "coding":         ["deepseek-coder-v2:latest", "qwen2.5-coder", "deepseek-coder-v2:16b-lite-instruct-q4_K_M"],
-    "fast_tasks":     ["llama3.2", "llama3", "deepseek-coder-v2:16b-lite-instruct-q4_K_M", "deepseek-coder-v2:latest"],
-    "research":       ["mistral", "llama3.1", "deepseek-coder-v2:latest"],
-    "planning":       ["gemma3", "gemma2", "llama3.2", "deepseek-coder-v2:latest"],
-    "embedding":      ["nomic-embed-text:latest", "nomic-embed-text", "mxbai-embed-large"],
-    "vision":         ["llava:7b", "llava", "llama3.2-vision"],
+    "deep_reasoning": ["qwythos:latest", "qwen3.5:9b", "gemma3:12b", "deepseek-coder-v2:16b-lite-instruct-q4_K_M"],
+    "coding":         ["amrit-coder:latest", "qwen2.5-coder:7b", "deepseek-coder-v2:16b-lite-instruct-q4_K_M"],
+    "fast_tasks":     ["amrit-coder:latest", "qwen2.5-coder:7b", "qwythos:latest"],
+    "research":       ["qwythos:latest", "qwen3.5:9b", "deepseek-coder-v2:16b-lite-instruct-q4_K_M"],
+    "planning":       ["qwythos:latest", "gemma3:12b", "gemma4:e4b"],
+    "embedding":      ["nomic-embed-text:latest", "nomic-embed-text"],
+    "vision":         ["llava:7b", "llava"],
 }
 
 
 class ModelRouter:
     """Resolves a task category to an OllamaClient backed by the best model."""
 
-    def __init__(self, default_model: str = "deepseek-coder-v2:latest"):
+    def __init__(self, default_model: str = "qwythos:latest"):
         self.default_model = default_model
         self._probe = OllamaClient(model=default_model)
         self._installed = set(self._probe.list_models()) if self._probe.is_available() else set()

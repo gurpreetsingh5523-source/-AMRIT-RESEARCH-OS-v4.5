@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMRIT RESEARCH OS v4.5 — Dashboard</title>
+<title>AMRIT RESEARCH OS v5.0 — Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -197,11 +197,13 @@ body{
 .chip.hi{border-color:var(--coral);color:var(--coral);background:var(--coral2)}
 .chip.ok{border-color:var(--teal);color:var(--teal);background:var(--teal3)}
 .chip.warn{border-color:var(--amber);color:var(--amber);background:var(--amber2)}
-.chat-log{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;min-height:340px;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
-.bubble{max-width:78%;padding:10px 14px;border-radius:10px;font-size:12px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
-.bubble.user{align-self:flex-end;background:var(--purple3);border:1px solid var(--purple2);color:var(--text)}
-.bubble.ai{align-self:flex-start;background:var(--bg4);border:1px solid var(--border2);color:var(--text2)}
-.bubble .who{font-size:8px;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-bottom:4px}
+.chat-log{background:#04060a;border:1px solid #1a2536;border-radius:8px;padding:20px;min-height:480px;max-height:65vh;overflow-y:auto;display:flex;flex-direction:column;gap:14px;font-family:'Space Mono',monospace;font-size:13px;box-shadow:inset 0 0 15px rgba(0,0,0,0.95);line-height:1.5}
+.bubble{max-width:100%;padding:0;border-radius:0;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;background:transparent;border:none}
+.bubble.user{align-self:flex-start;color:#e2e8f0}
+.bubble.ai{align-self:flex-start;color:#34d399}
+.bubble .who{font-size:12px;letter-spacing:1px;text-transform:none;opacity:1;margin-bottom:4px;font-weight:bold;font-family:'Space Mono',monospace}
+.bubble.user .who{color:#38bdf8}
+.bubble.ai .who{color:#10b981}
 .chat-row{display:flex;gap:8px;margin-top:12px}
 .li-row{display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px}
 .li-row:last-child{border-bottom:none}
@@ -219,14 +221,14 @@ body{
     <div class="logo-badge">A</div>
     <div>
       <div class="logo-text">AMRIT RESEARCH OS</div>
-      <div class="logo-sub">AUTONOMOUS SCIENTIFIC DISCOVERY ENGINE · v4.0</div>
+      <div class="logo-sub">AUTONOMOUS SCIENTIFIC DISCOVERY ENGINE · v5.0</div>
     </div>
   </div>
   <div class="hdr-right">
     <span class="session-id" id="sid">SESSION: —</span>
     <span class="badge" id="ollama-badge" style="border-color:#475569;color:#64748b;background:transparent">OLLAMA: OFFLINE</span>
     <span class="badge badge-info">QUANTUM: SIM</span>
-    <span class="badge badge-ok">v4.5 ✓</span>
+    <span class="badge badge-ok">v5.0 ✓</span>
     <span class="badge badge-dim">BY GURPREET SINGH</span>
   </div>
 </div>
@@ -382,11 +384,14 @@ body{
         <select class="v4-input" id="new-thread-cat" style="max-width:140px"></select>
         <button class="v4-btn ghost" onclick="createThread()">+ Thread</button>
       </div>
-      <div class="chat-log" id="chat-log">
-        <div class="bubble ai"><div class="who">AMRIT</div>Hello. Ask me anything about your research, data, or science. I route to the best installed model automatically.</div>
+      <div class="chat-log" id="chat-log" style="font-family:'Space Mono',monospace;">
+        <div class="bubble ai"><div class="who">amrit-brain@system:~$</div>Hello. Ask me anything about your research, data, or science. I route to the best installed model automatically.</div>
       </div>
-      <div class="chat-row">
-        <input class="v4-input" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendChat()">
+      <div class="chat-row" style="display:flex;gap:8px;margin-top:12px">
+        <button class="v4-btn ghost" onclick="triggerFileUpload()" title="Upload File" style="padding:9px 12px;display:flex;align-items:center;gap:4px">📁 Upload</button>
+        <input type="file" id="chat-file-input" style="display:none" onchange="handleFileUpload(event)">
+        <button class="v4-btn ghost" id="chat-voice-btn" onclick="toggleVoiceInput()" title="Voice Input" style="padding:9px 12px;display:flex;align-items:center;gap:4px">🎤 Mic</button>
+        <input class="v4-input" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendChat()" style="flex-grow:1;font-family:'Space Mono',monospace">
         <button class="v4-btn" id="chat-send" onclick="sendChat()">Send</button>
         <button class="v4-btn ghost" onclick="clearChat()">Clear</button>
       </div>
@@ -943,7 +948,8 @@ function addBubble(role,text){
   const log=document.getElementById('chat-log');
   const d=document.createElement('div');
   d.className='bubble '+(role==='user'?'user':'ai');
-  d.innerHTML='<div class="who">'+(role==='user'?'You':'AMRIT')+'</div>'+esc(text);
+  const whoName = role === 'user' ? 'researcher@amrit-os:~$' : 'amrit-brain@system:~$';
+  d.innerHTML='<div class="who">'+whoName+'</div>'+esc(text);
   log.appendChild(d);log.scrollTop=log.scrollHeight;
   return d;
 }
@@ -956,18 +962,104 @@ async function sendChat(){
   const pending=addBubble('ai','…thinking…');
   try{
     const d=await postJSON('/api/chat',{message:msg,history:chatHistory,remember:document.getElementById('chat-remember').checked});
-    pending.innerHTML='<div class="who">AMRIT</div>'+esc(d.reply||'(no reply)');
+    pending.innerHTML='<div class="who">amrit-brain@system:~$</div>'+esc(d.reply||'(no reply)');
     const rc=(d.recalled||0);
     document.getElementById('chat-model').textContent='model: '+(d.model||'—')+(rc?'  ·  recalled '+rc+' memory '+(rc===1?'note':'notes'):'');
     chatHistory.push({role:'user',content:msg});
     chatHistory.push({role:'assistant',content:d.reply||''});
-  }catch(e){pending.innerHTML='<div class="who">AMRIT</div>⚠ '+esc(''+e);}
+  }catch(e){pending.innerHTML='<div class="who">amrit-brain@system:~$</div>⚠ '+esc(''+e);}
   btn.disabled=false;
 }
 function clearChat(){
   chatHistory=[];
-  document.getElementById('chat-log').innerHTML='<div class="bubble ai"><div class="who">AMRIT</div>Cleared. Ask me anything.</div>';
+  document.getElementById('chat-log').innerHTML='<div class="bubble ai"><div class="who">amrit-brain@system:~$</div>Cleared. Ask me anything.</div>';
   document.getElementById('chat-model').textContent='';
+}
+
+// File Upload Handler
+function triggerFileUpload() {
+  document.getElementById('chat-file-input').click();
+}
+
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const inp = document.getElementById('chat-input');
+    inp.value = `[Uploaded File: ${file.name}]\n\n` + text + `\n\n[End of File Content]\n\n` + inp.value;
+    alert(`File "${file.name}" loaded successfully into chat input box. You can now press Send to ask questions about it.`);
+  };
+  reader.readAsText(file);
+}
+
+// Web Speech API Voice Transcription Handler
+let recognition;
+let isRecording = false;
+
+function toggleVoiceInput() {
+  const btn = document.getElementById('chat-voice-btn');
+  const inp = document.getElementById('chat-input');
+  
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    alert("Speech recognition is not supported in this browser. Please use Chrome/Safari on macOS.");
+    return;
+  }
+  
+  if (isRecording) {
+    recognition.stop();
+    return;
+  }
+  
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+
+  recognition.onstart = function() {
+    isRecording = true;
+    btn.classList.add('recording');
+    btn.innerHTML = '🛑 Listening...';
+    btn.style.background = '#dc2626';
+    btn.style.color = '#fff';
+    inp.placeholder = "Listening to voice input...";
+  };
+
+  recognition.onresult = function(event) {
+    let interim_transcript = '';
+    let final_transcript = '';
+    
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    
+    if (final_transcript) {
+      inp.value = (inp.value ? inp.value + ' ' : '') + final_transcript;
+    }
+  };
+
+  recognition.onend = function() {
+    isRecording = false;
+    btn.classList.remove('recording');
+    btn.innerHTML = '🎤 Mic';
+    btn.style.background = '';
+    btn.style.color = '';
+    inp.placeholder = "Type a message…";
+  };
+
+  recognition.onerror = function(event) {
+    console.error("Speech recognition error", event.error);
+    recognition.stop();
+  };
+
+  recognition.start();
 }
 
 // ── Documents ──

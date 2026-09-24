@@ -21,11 +21,12 @@ data/lims.db
 *.tvim
 data/vector_store/
 
-# Logs and debug
+# Logs, heal logs and debug
 logs/*.log
 *.log
 server_stdout.log
 data/self_heal/backups/
+data/self_heal/heal_log.jsonl
 
 # Reports
 reports/pdf/*
@@ -35,3 +36,6 @@ reports/json/*
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Separate sub-projects
+nam-toon-studio/

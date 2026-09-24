@@ -61,7 +61,7 @@ class OllamaClient:
             method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=120) as r:
+            with urllib.request.urlopen(req, timeout=300) as r:
                 data = json.loads(r.read().decode())
                 return data.get("message", {}).get("content", "No response").strip()
         except Exception as e:

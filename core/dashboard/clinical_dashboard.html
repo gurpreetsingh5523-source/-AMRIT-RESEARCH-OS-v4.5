@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMRIT Humanoid Clinical Companion</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #07090e;
+            --card-bg: rgba(18, 24, 38, 0.7);
+            --border: rgba(43, 58, 86, 0.6);
+            --border-hover: rgba(99, 102, 241, 0.5);
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --text: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --green: #10b981;
+            --green-bg: rgba(16, 185, 129, 0.15);
+            --red: #ef4444;
+            --red-bg: rgba(239, 68, 68, 0.15);
+            --amber: #f59e0b;
+            --amber-bg: rgba(245, 158, 11, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .hdr-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hdr-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--accent), #4f46e5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: white;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .hdr-text h1 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .hdr-text p {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .role-badge {
+            background-color: var(--amber-bg);
+            border: 1px solid var(--amber);
+            color: var(--amber);
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+        }
+
+        .role-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--amber);
+            box-shadow: 0 0 8px var(--amber);
+        }
+
+        .role-doctor {
+            background-color: var(--green-bg);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .role-doctor .role-dot {
+            background-color: var(--green);
+            box-shadow: 0 0 8px var(--green);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            display: grid;
+            grid-template-columns: 320px 1fr 360px;
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
+            overflow: hidden;
+            height: calc(100vh - 73px);
+        }
+
+        /* COLUMNS */
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            height: 100%;
+            padding-right: 4px;
+        }
+
+        /* CUSTOM SCROLLBARS */
+        .column::-webkit-scrollbar, .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .column::-webkit-scrollbar-track, .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .column::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* CAMERA FEED */
+        .camera-feed {
+            width: 100%;
+            height: 160px;
+            background-color: #0b0f19;
+            border-radius: 12px;
+            border: 1px dashed var(--border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .camera-scanner-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            position: absolute;
+            top: 0;
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 160px; }
+        }
+
+        /* DRAG & DROP ZONE */
+        .drop-zone {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--accent);
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        /* FORM CONTROLS */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            background-color: rgba(11, 15, 25, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+        }
+
+        /* BUTTONS */
+        .btn {
+            background: linear-gradient(135deg, var(--accent), #4f46e5);
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ADJUSTABLE CHATBOX */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 14px 20px;
+            background: rgba(11, 15, 25, 0.4);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .msg {
+            display: flex;
+            flex-direction: column;
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+
+        .msg-bot {
+            background-color: rgba(38, 53, 74, 0.4);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-user {
+            background-color: var(--accent);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .msg-meta {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            align-self: flex-end;
+        }
+
+        .msg-user .msg-meta {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .chat-input-area {
+            padding: 16px;
+            background: rgba(11, 15, 25, 0.6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input-area textarea {
+            flex-grow: 1;
+            resize: none;
+            height: 40px;
+            border-radius: 20px;
+            padding: 10px 16px;
+        }
+
+        /* LOCKED OVERLAY */
+        .locked-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 9, 14, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .lock-icon {
+            font-size: 32px;
+            color: var(--amber);
+        }
+
+        /* DIET & MEDICATIONS CSS */
+        .profile-kv {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            font-size: 12.5px;
+            border-bottom: 1px solid rgba(38, 53, 74, 0.4);
+            padding: 6px 0;
+        }
+
+        .profile-kv:last-child {
+            border-bottom: none;
+        }
+
+        .profile-key {
+            color: var(--text-secondary);
+        }
+
+        .med-item {
+            background-color: rgba(11, 15, 25, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .med-hdr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .med-name {
+            font-weight: 600;
+        }
+
+        .med-badge {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-approved { background-color: var(--green-bg); color: var(--green); }
+        .badge-caution { background-color: var(--amber-bg); color: var(--amber); }
+        .badge-danger { background-color: var(--red-bg); color: var(--red); }
+
+        .med-notes {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .bullet-list {
+            margin-left: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="hdr-title-wrap">
+            <div class="hdr-logo">A</div>
+            <div class="hdr-text">
+                <h1>AMRIT Companion</h1>
+                <p>HUMANOID VOICE INTERACTION & CLINICAL ACCESS OVERLAY</p>
+            </div>
+        </div>
+        <div class="role-badge" id="active-role-badge">
+            <div class="role-dot"></div>
+            <span id="active-role-text">Scanning Biometrics...</span>
+        </div>
+    </header>
+
+    <!-- MAIN GRID CONTAINER -->
+    <div class="container">
+
+        <!-- COLUMN 1: BIOMETRICS & CAMERA FEED -->
+        <div class="column">
+            
+            <!-- Camera Simulator -->
+            <div class="card">
+                <div class="card-title">
+                    <span>Biometric Face Scanner</span>
+                    <span style="font-size: 10px; color: var(--green);">LIVE</span>
+                </div>
+                <div class="camera-feed">
+                    <div class="camera-overlay">🟢 CAM_SIM_01</div>
+                    <div class="camera-scanner-line"></div>
+                    <div id="cam-view-text" style="font-weight: 500; font-size: 13px;">No Face Scanned</div>
+                    <div id="cam-sub-text" style="font-size: 11px; color: var(--text-secondary);">Position face in camera frame</div>
+                </div>
+                <div class="form-group">
+                    <label>Simulate Person in Feed</label>
+                    <select id="feed-sim-select" onchange="simulateFeedChange()">
+                        <option value="face_doctor.jpg">Dr. Amrit (Clinician Face Scan)</option>
+                        <option value="face_gurmit.jpg">Gurmit Singh (Registered Patient)</option>
+                        <option value="face_aman.jpg">Amandeep (Registered Patient)</option>
+                        <option value="face_stranger.jpg">Unregistered Stranger (Intake Mode)</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="triggerFaceRecall()">
+                    <span>Recognize Face</span>
+                </button>
+            </div>
+
+            <!-- Face Photo Drag-Drop -->
+            <div class="card">
+                <div class="card-title">Drag & Drop Face File</div>
+                <div class="drop-zone" id="face-drop-zone">
+                    Drag and drop patient face scan here to recognize instantly
+                </div>
+            </div>
+
+            <!-- Patient DB Side History -->
+            <div class="card">
+                <div class="card-title">Registered Patients Database</div>
+                <div id="patient-db-list" style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="font-size: 12px; color: var(--text-secondary); text-align: center;">No registered patients loaded.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLUMN 2: ADJUSTABLE CLINICAL CHATBOT -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <span id="chat-title" style="font-weight: 600;">AMRIT Voice Assistant</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent);">v6.2-ROBOT</span>
+            </div>
+            
+            <div class="chat-messages" id="chat-logs">
+                <div class="msg msg-bot">
+                    Hello, I am the AMRIT Humanoid Companion. Please scan your face to authenticate or register.
+                    <div class="msg-meta">System</div>
+                </div>
+            </div>
+
+            <!-- Chat Inputs -->
+            <div class="chat-input-area">
+                <div id="chat-scan-indicator" style="display: none; background-color: var(--accent-glow); padding: 4px 10px; border-radius: 8px; font-size: 11px;">
+                    📎 Scan attached
+                </div>
+                <textarea id="chat-input" placeholder="Type message or click mic to speak..." onkeydown="handleChatKey(event)"></textarea>
+                
+                <button class="btn" id="mic-btn" onclick="toggleSpeechInput()" style="padding: 10px;" title="Record Voice (Punjabi/English)">
+                    🎤
+                </button>
+                <button class="btn" onclick="sendChatMessage()">
+                    Send
+                </button>
+            </div>
+        </div>
+
+        <!-- COLUMN 3: CLINICIAN OR PATIENT DASHBOARD VIEWS -->
+        <div class="column" style="position: relative;">
+            
+            <!-- CLINICIAN LOCKED STATE COVER (WITH REGISTRATION PORTAL OR UNLOCK FORM) -->
+            <div class="locked-overlay" id="clinician-lock">
+                <div id="lock-loading" style="text-align: center;">Loading biometric security profile...</div>
+            </div>
+
+            <!-- CLINICIAN DASHBOARD PANEL -->
+            <div class="card">
+                <div class="card-title">Population Epidemiology Ratios</div>
+                <div id="epi-stats" style="display: flex; flex-direction: column; gap: 8px;">
+                    <div class="profile-kv"><div class="profile-key">Hypertension %:</div><div id="stat-hyp">-</div></div>
+                    <div class="profile-kv"><div class="profile-key">Diabetes %:</div><div id="stat-diab">-</div></div>
+                    <div class="profile-kv"><div class="profile-key">Hyperlipidemia %:</div><div id="stat-lipid">-</div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Epidemiology Prevention Plan</div>
+                <div id="epi-plan-desc" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+                    No epidemiology data compiled yet.
+                </div>
+                <button class="btn" onclick="triggerBioResearch()">
+                    <span>Trigger Bio Research Loop</span>
+                </button>
+                <div id="research-status" style="font-size: 11.5px; color: var(--amber); text-align: center;"></div>
+            </div>
+
+            <!-- PATIENT CLINICAL HISTORY (LOADED ON RECALL) -->
+            <div class="card" id="patient-card" style="display: none;">
+                <div class="card-title">Active Patient Diagnostics</div>
+                <div id="patient-summary">
+                    <div class="profile-kv"><div class="profile-key">Name:</div><div id="p-name">-</div></div>
+                    <div class="profile-kv"><div class="profile-key">BP:</div><div id="p-bp">-</div></div>
+                    <div class="profile-kv"><div class="profile-key">Weight:</div><div id="p-weight">-</div></div>
+                    <div class="profile-kv"><div class="profile-key">SLCO1B1:</div><div id="p-slco">-</div></div>
+                </div>
+            </div>
+
+            <div class="card" id="med-card" style="display: none;">
+                <div class="card-title">Medications Alignment</div>
+                <div id="med-list"></div>
+            </div>
+
+            <div class="card" id="diet-card" style="display: none;">
+                <div class="card-title">Personalized Diet Plan</div>
+                <div id="diet-list"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- AUDIO SIMULATION UTILITIES & DATA CONTROLLERS -->
+    <script>
+        let currentRole = "unidentified";
+        let activePatientId = null;
+        let activeScanType = null;
+        let activeFaceImage = null;
+
+        // DIALOG STATE MACHINE FOR VOICE INTAKE CONVERSATION
+        let intakeState = 0;
+        let tempRegistrationData = {
+            name: "",
+            address: "",
+            emergency_phone: "",
+            bp: "120/80",
+            weight: "70 kg",
+            voice_transcript: ""
+        };
+
+        // WEB SPEECH RECOGNITION CONTROLLER
+        let recognition = null;
+        let isListening = false;
+        let conversationHistory = [];
+
+        window.onload = function() {
+            setupDragDrop();
+            refreshEpidemiology();
+            checkClinicianStatus();
+        };
+
+        function setupDragDrop() {
+            const faceDropZone = document.getElementById("face-drop-zone");
+            faceDropZone.addEventListener("dragover", e => {
+                e.preventDefault();
+                faceDropZone.classList.add("dragover");
+            });
+            faceDropZone.addEventListener("dragleave", () => {
+                faceDropZone.classList.remove("dragover");
+            });
+            faceDropZone.addEventListener("drop", e => {
+                e.preventDefault();
+                faceDropZone.classList.remove("dragover");
+                const file = e.dataTransfer.files[0];
+                if (file) {
+                    faceDropZone.innerText = "Received face scan: " + file.name;
+                    activeFaceImage = file.name;
+                    triggerFaceRecall(file.name);
+                }
+            });
+        }
+
+        // BIOMETRIC CLINICIAN REGISTRATION AND STATUS LOADER
+        function checkClinicianStatus() {
+            fetch("/api/clinician/status")
+            .then(res => res.json())
+            .then(data => {
+                const lockDiv = document.getElementById("clinician-lock");
+                if (!data.registered) {
+                    // Setup registration screen
+                    lockDiv.innerHTML = `
+                        <div class="lock-icon" style="color: var(--amber); margin-bottom: 4px;">🛡️</div>
+                        <h3 style="font-weight: 600; text-align: center; margin-bottom: 4px;">Clinician Setup Required</h3>
+                        <p style="font-size: 11px; color: var(--text-secondary); text-align: center; margin-bottom: 12px; line-height: 1.4;">
+                            ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਆਪਣਾ ਨਾਮ ਦਰਜ ਕਰੋ ਅਤੇ ਬਾਇਓਮੈਟ੍ਰਿਕ ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ।
+                        </p>
+                        <div class="form-group" style="width: 100%; max-width: 280px; margin-bottom: 8px;">
+                            <label>Clinician Full Name</label>
+                            <input type="text" id="reg-doc-name" placeholder="Dr. Gurpreet Dhillon">
+                        </div>
+                        <div class="form-group" style="width: 100%; max-width: 280px; margin-bottom: 12px;">
+                            <label>Select Face Scan File</label>
+                            <select id="reg-doc-face">
+                                <option value="face_doctor.jpg">Dr. Amrit Mock Face Scan</option>
+                                <option value="face_custom_doctor.jpg">Custom Doctor Face File</option>
+                            </select>
+                        </div>
+                        <button class="btn" style="width: 100%; max-width: 280px;" onclick="registerClinicianBiometrics()">
+                            <span>Register Biometrics & Secure</span>
+                        </button>
+                        <div id="lock-status" style="font-size: 11px; color: var(--amber); margin-top: 6px;"></div>
+                    `;
+                } else {
+                    // Biometric lock screen
+                    const doctorName = data.clinicians[0].name;
+                    lockDiv.innerHTML = `
+                        <div class="lock-icon">🔒</div>
+                        <h3 style="font-weight: 600; text-align: center; margin-bottom: 4px;">Clinician Access Locked</h3>
+                        <p style="font-size: 11.5px; color: var(--text-secondary); text-align: center; max-width: 80%;">
+                            Biometric security active. Scan your face or upload file to unlock dashboard.
+                        </p>
+                        <div style="font-size: 12px; color: var(--accent); font-weight: 500; margin-top: 8px; padding: 4px 12px; background: rgba(99, 102, 241, 0.1); border-radius: 6px;">
+                            Keyholder: ${doctorName}
+                        </div>
+                    `;
+                }
+            })
+            .catch(err => console.error("Error fetching clinician status:", err));
+        }
+
+        function registerClinicianBiometrics() {
+            const docName = document.getElementById("reg-doc-name").value.trim();
+            const docFace = document.getElementById("reg-doc-face").value;
+            
+            if (!docName) {
+                alert("Please enter a clinician name.");
+                return;
+            }
+
+            const statusDiv = document.getElementById("lock-status");
+            if (statusDiv) statusDiv.innerText = "Registering clinician profile...";
+
+            fetch("/api/clinician/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: docName, face_image: docFace })
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(err => { throw new Error(err.error || "Server registration error"); });
+                }
+                return res.json();
+            })
+            .then(data => {
+                alert(`Security profile established for ${data.name}. Biometric lock enabled.`);
+                checkClinicianStatus();
+            })
+            .catch(err => {
+                alert("Registration failed: " + err.message);
+                if (statusDiv) statusDiv.innerText = "Error: " + err.message;
+            });
+        }
+
+        // WEB SPEECH RECOGNITION (PUNJABI & ENGLISH LISTENER)
+        function toggleSpeechInput() {
+            const micBtn = document.getElementById("mic-btn");
+            const inputField = document.getElementById("chat-input");
+
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Speech recognition is not supported in this browser. Please use Google Chrome or Safari.");
+                return;
+            }
+
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!recognition) {
+                recognition = new SpeechRec();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'pa-IN'; // Punjabi default
+
+                recognition.onstart = function() {
+                    isListening = true;
+                    micBtn.innerText = "🛑";
+                    micBtn.style.background = "var(--red)";
+                    inputField.placeholder = "Listening in Punjabi... speak now...";
+                };
+
+                recognition.onresult = function(event) {
+                    const resultText = event.results[0][0].transcript;
+                    inputField.value = resultText;
+                };
+
+                recognition.onerror = function(event) {
+                    console.error("Speech recognition error", event.error);
+                    inputField.placeholder = "Error: " + event.error + ". Try typing.";
+                };
+
+                recognition.onend = function() {
+                    isListening = false;
+                    micBtn.innerText = "🎤";
+                    micBtn.style.background = "linear-gradient(135deg, var(--accent), #4f46e5)";
+                    inputField.placeholder = "Type message or click mic to speak...";
+                    if (inputField.value.trim()) {
+                        sendChatMessage();
+                    }
+                };
+            }
+
+            if (isListening) {
+                recognition.stop();
+            } else {
+                // Punjabi if in active intake conversation, English otherwise
+                recognition.lang = (intakeState > 0) ? 'pa-IN' : 'en-US';
+                recognition.start();
+            }
+        }
+
+        // SIMULATE WEBCAM SELECTION DISPLAY CHANGE
+        function simulateFeedChange() {
+            const feedVal = document.getElementById("feed-sim-select").value;
+            const camViewText = document.getElementById("cam-view-text");
+            const camSubText = document.getElementById("cam-sub-text");
+            
+            if (feedVal === "face_doctor.jpg") {
+                camViewText.innerText = "Dr. Amrit Spotted";
+                camSubText.innerText = "Face recognized - Clinician profile active";
+            } else if (feedVal === "face_gurmit.jpg") {
+                camViewText.innerText = "Gurmit Singh Spotted";
+                camSubText.innerText = "Face recognized - Patient profile active";
+            } else if (feedVal === "face_aman.jpg") {
+                camViewText.innerText = "Amandeep Spotted";
+                camSubText.innerText = "Face recognized - Patient profile active";
+            } else {
+                camViewText.innerText = "Stranger Spotted";
+                camSubText.innerText = "Unknown face - Starting registration intake";
+            }
+        }
+
+        // CALL REST ENDPOINT TO DETECT/RECALL FACE AND ASSIGN ROLE
+        function triggerFaceRecall(overrideFile = null) {
+            const feedVal = overrideFile || document.getElementById("feed-sim-select").value;
+            
+            fetch("/api/patient/recall-face", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ face_image_path_or_base64: feedVal })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const roleText = document.getElementById("active-role-text");
+                const badge = document.getElementById("active-role-badge");
+                const lockCover = document.getElementById("clinician-lock");
+                
+                if (data.profile.role === "doctor") {
+                    currentRole = "doctor";
+                    roleText.innerText = `Clinician: ${data.profile.name}`;
+                    badge.className = "role-badge role-doctor";
+                    lockCover.style.display = "none";
+                    appendBotMessage(`Access Granted. Clinician portal unlocked. Welcome, ${data.profile.name}.`);
+                    loadClinicianDatabase();
+                } else if (data.profile.role === "patient") {
+                    currentRole = "patient";
+                    roleText.innerText = `Patient: ${data.profile.name}`;
+                    badge.className = "role-badge";
+                    lockCover.style.display = "flex"; // Lock Doctor view
+                    appendBotMessage(`Hello ${data.profile.name}. Welcome back. Loading your diagnostic history, genetic markers, and personalized nutrition profile.`);
+                    displayPatientResults(data);
+                } else {
+                    currentRole = "new_patient";
+                    roleText.innerText = "Intake Mode";
+                    badge.className = "role-badge";
+                    lockCover.style.display = "flex";
+                    
+                    // Reset dialogue
+                    intakeState = 1;
+                    appendBotMessage("Hello, I see you are a new patient. Let's record your file. What is your name? (ਤੁਹਾਡਾ ਨਾਮ ਕੀ ਹੈ?)");
+                }
+            })
+            .catch(err => console.error("Recall error:", err));
+        }
+
+        // CLINICAL INTAKE STATE MACHINE DIALOGUE
+        function processIntakeMessage(userMsg) {
+            if (intakeState === 1) {
+                tempRegistrationData.name = userMsg;
+                intakeState = 2;
+                appendBotMessage("Please tell me your Address/Location. (ਤੁਹਾਡਾ ਪਤਾ ਕੀ ਹੈ?)");
+            } else if (intakeState === 2) {
+                tempRegistrationData.address = userMsg;
+                intakeState = 3;
+                appendBotMessage("Please provide an Emergency Phone Number. (ਐਮਰਜੈਂਸੀ ਫੋਨ ਨੰਬਰ ਦੱਸੋ)");
+            } else if (intakeState === 3) {
+                tempRegistrationData.emergency_phone = userMsg;
+                intakeState = 4;
+                appendBotMessage("What is your current Weight and Blood Pressure? (ਤੁਹਾਡਾ ਭਾਰ ਅਤੇ ਬੀ.ਪੀ. ਕਿੰਨਾ ਹੈ? e.g. 78 kg, 135/85)");
+            } else if (intakeState === 4) {
+                const parts = userMsg.split(",");
+                if (parts.length >= 2) {
+                    tempRegistrationData.weight = parts[0].trim();
+                    tempRegistrationData.bp = parts[1].trim();
+                } else {
+                    tempRegistrationData.weight = "80 kg";
+                    tempRegistrationData.bp = userMsg.trim();
+                }
+                intakeState = 0;
+                appendBotMessage("Thank you. I am saving your profile to the database and running diagnostics...");
+                
+                fetch("/api/patient/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(tempRegistrationData)
+                })
+                .then(res => res.json())
+                .then(record => {
+                    fetch(`/api/patient/${record.id}`)
+                    .then(res => res.json())
+                    .then(outcome => {
+                        displayPatientResults(outcome);
+                        appendBotMessage(`Diagnostics completed successfully for ${record.name}. Your profile ID is ${record.id}.`);
+                        refreshEpidemiology();
+                    });
+                });
+            }
+        }
+
+        // SIMULATE VOICE INTAKE OR SPEECH UTILITY
+        function simulateSpeechInput() {
+            const inputField = document.getElementById("chat-input");
+            
+            if (intakeState === 1) {
+                inputField.value = "Gurmit Singh";
+            } else if (intakeState === 2) {
+                inputField.value = "Amritsar, Punjab";
+            } else if (intakeState === 3) {
+                inputField.value = "98765-43210";
+            } else if (intakeState === 4) {
+                inputField.value = "82 kg, 140/90";
+            } else {
+                inputField.value = "ਮੈਨੂੰ ਛਾਤੀ ਵਿੱਚ ਦਰਦ ਹੈ ਅਤੇ ਬਹੁਤ ਥਕਾਵਟ ਹੁੰਦੀ ਹੈ।";
+            }
+        }
+
+        // HANDLE CHAT MESSAGES
+        function handleChatKey(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById("chat-input");
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendUserMessage(text);
+            input.value = "";
+
+            if (intakeState > 0) {
+                processIntakeMessage(text);
+            } else {
+                // Call real Ollama Chat API!
+                fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        message: text,
+                        history: conversationHistory.slice(-10), // send last 10 turns
+                        task: "medical_general",
+                        remember: true
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    appendBotMessage(data.reply);
+                })
+                .catch(err => {
+                    console.error("Chat API error:", err);
+                    appendBotMessage(`[Offline Fallback] Acknowledged: '${text}'. Let me know if you would like me to coordinate with genomic database overlays.`);
+                });
+            }
+        }
+
+        function appendBotMessage(text) {
+            const logs = document.getElementById("chat-logs");
+            logs.innerHTML += `
+                <div class="msg msg-bot">
+                    ${text}
+                    <div class="msg-meta">AMRIT</div>
+                </div>
+            `;
+            logs.scrollTop = logs.scrollHeight;
+            conversationHistory.push({ role: "assistant", content: text });
+        }
+
+        function appendUserMessage(text) {
+            const logs = document.getElementById("chat-logs");
+            logs.innerHTML += `
+                <div class="msg msg-user">
+                    ${text}
+                    <div class="msg-meta">User</div>
+                </div>
+            `;
+            logs.scrollTop = logs.scrollHeight;
+            conversationHistory.push({ role: "user", content: text });
+        }
+
+        // POPULATE PATIENT DETAILS CARDS
+        function displayPatientResults(data) {
+            const profile = data.profile;
+            const assessment = data.assessment;
+
+            document.getElementById("patient-card").style.display = "block";
+            document.getElementById("med-card").style.display = "block";
+            document.getElementById("diet-card").style.display = "block";
+
+            document.getElementById("p-name").innerText = profile.name;
+            document.getElementById("p-bp").innerText = profile.bp;
+            document.getElementById("p-weight").innerText = profile.weight;
+            document.getElementById("p-slco").innerText = profile.dna_variants ? (profile.dna_variants["SLCO1B1"] || "normal") : "normal";
+
+            const medList = document.getElementById("med-list");
+            medList.innerHTML = "";
+            if (assessment.medication_recommendations) {
+                assessment.medication_recommendations.forEach(m => {
+                    let badgeClass = "badge-approved";
+                    if (m.status.includes("Caution")) badgeClass = "badge-caution";
+                    if (m.status.includes("CONTRAINDICATED") || m.status.includes("HIGH RISK")) badgeClass = "badge-danger";
+
+                    medList.innerHTML += `
+                        <div class="med-item">
+                            <div class="med-hdr">
+                                <span class="med-name">${m.recommended_drug}</span>
+                                <span class="med-badge ${badgeClass}">${m.status}</span>
+                            </div>
+                            <div class="med-notes">Trigger: ${m.disease} (${m.marker_trigger})</div>
+                            <div class="med-notes">${m.notes}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            const dietList = document.getElementById("diet-list");
+            const diet = assessment.diet_plan;
+            if (diet) {
+                dietList.innerHTML = `
+                    <div style="font-weight: 600; margin-bottom: 6px; color: var(--accent);">Pattern: ${diet.dietary_pattern}</div>
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">
+                        Carbs: ${diet.macronutrients.carbohydrates} | Prot: ${diet.macronutrients.protein} | Fats: ${diet.macronutrients.fats}
+                    </div>
+                    <div class="med-notes"><strong>Include:</strong> ${diet.foods_to_include.join(', ')}</div>
+                    <div class="med-notes"><strong>Avoid:</strong> ${diet.foods_to_avoid.join(', ')}</div>
+                `;
+            }
+        }
+
+        // EPIDEMIOLOGY METRICS UPDATE
+        function refreshEpidemiology() {
+            fetch("/api/epidemiology/summary")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("stat-hyp").innerText = data.hypertension_percentage + "%";
+                document.getElementById("stat-diab").innerText = data.diabetes_percentage + "%";
+                document.getElementById("stat-lipid").innerText = data.hyperlipidemia_percentage + "%";
+                
+                document.getElementById("epi-plan-desc").innerText = data.community_prevention_plan;
+            });
+        }
+
+        // CLINICIAN DATABASE TABLE LOADING
+        function loadClinicianDatabase() {
+            fetch("/api/epidemiology/summary")
+            .then(res => res.json())
+            .then(data => {
+                const listDiv = document.getElementById("patient-db-list");
+                listDiv.innerHTML = "";
+                
+                data.patient_keys.forEach(k => {
+                    listDiv.innerHTML += `
+                        <div class="med-item" style="cursor: pointer; display: flex; justify-content: space-between;" onclick="loadPatientRecord('${k}')">
+                            <span style="font-weight: 500;">Patient ID: ${k}</span>
+                            <span style="color: var(--accent);">Load Profile</span>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        function loadPatientRecord(id) {
+            fetch(`/api/patient/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                displayPatientResults(data);
+                appendBotMessage(`Loaded clinical file for patient id: ${id}.`);
+            });
+        }
+
+        function triggerBioResearch() {
+            const status = document.getElementById("research-status");
+            status.innerText = "Mining biomedical literature journals...";
+            fetch("/api/epidemiology/research", { method: "POST" })
+            .then(res => res.json())
+            .then(d => {
+                status.innerText = "Research status: " + d.message;
+            });
+        }
+    </script>
+</body>
+</html>
