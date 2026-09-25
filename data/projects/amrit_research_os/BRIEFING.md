@@ -12,16 +12,19 @@
    • [feature] Added Voice Agent (Punjabi+Hindi+English)
    • [milestone] Built JARVIS computer control (terminal+browser+code)
 
-💡 ਸਿੱਖੇ ਸਬਕ (3):
+💡 ਸਿੱਖੇ ਸਬਕ (4):
    ⭐ ਹਰ project ਦੀ memory ਵੱਖ ਰੱਖੋ — ਮਿਕਸ ਨਾ ਹੋਵੇ
    ⭐ ਹਮੇਸ਼ਾ server.py ਚਲਾ ਕੇ ਟੈਸਟ ਕਰੋ packaging ਤੋਂ ਪਹਿਲਾਂ
+   ⭐ ਕੋਰ ਮੈਡੀਕਲ IP (Digital Twin, DNA, Diagnostics) ਕਦੇ ਮੁਫ਼ਤ/ਪਬਲਿਕ ਨਾ ਕਰੋ — ਹਮੇਸ਼ਾ Private ਰੱਖੋ!
    • Repo ਪੜ੍ਹ ਕੇ ਹੀ ਜਵਾਬ ਦਿਓ, ਅੰਦਾਜ਼ਾ ਨਾ ਲਾਓ
 
-⚠️  ਗਲਤੀਆਂ ਜੋ ਨਾ ਦੁਹਰਾਈਏ (2):
+⚠️  ਗਲਤੀਆਂ ਜੋ ਨਾ ਦੁਹਰਾਈਏ (3):
    ✗ server.py ਵਿੱਚ Request import ਭੁੱਲ ਗਿਆ ਸੀ
      → ਹੱਲ: FastAPI Pydantic models ਵਰਤੋ, Request ਨਹੀਂ
    ✗ Stats engine ਵਿੱਚ fake random p-value ਸੀ (v1)
      → ਹੱਲ: scipy.stats ਵਰਤੋ — real t-test, ANOVA, chi-square
+   ✗ ਮੈਡੀਕਲ ਡਾਇਲਾਗ / ਕਲੀਨਿਕਲ ਡਾਟਾਸੈੱਟ ਪਬਲਿਕ ਰੱਖਣਾ
+     → ਹੱਲ: HF 'ਤੇ ਸਿਰਫ਼ ਭਾਸ਼ਾਈ ਮਾਡਲ/ਡਾਟਾ ਪਬਲਿਕ ਹੋਵੇ, ਸਾਰਾ ਮੈਡੀਕਲ ਡਾਟਾ Private ਰਹੇਗਾ
 
 🔮 ਅਗਲੇ ਕਦਮ (5):
    🔴 v5.0: Self-evolving DNA engine (ਹਰ ਰਾਤ NCBI ਤੋਂ ਸਿੱਖੇ)
