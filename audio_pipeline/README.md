@@ -45,4 +45,8 @@ python3 audio_pipeline/youtube_punjabi_audio_pipeline.py \
 ---
 
 ### 🌐 Published Datasets
-- **[Nam-toon-studio/Punjabi-Conversational-Speech-Corpus](https://huggingface.co/datasets/Nam-toon-studio/Punjabi-Conversational-Speech-Corpus)**: 60 clean 16kHz mono speech clips transcribed in Gurmukhi.
+- **[Nam-toon-studio/Punjabi-Conversational-Speech-Corpus](https://huggingface.co/datasets/Nam-toon-studio/Punjabi-Conversational-Speech-Corpus)**: 
+  - **91 verified 16kHz mono speech clips** (~16.5 minutes total audio).
+  - Includes both `transcription` (100% human-verified, grammatically curated Gurmukhi) and `raw_transcription` (unprocessed CTC acoustic ASR output).
+  - Speaker: Bhai Ranjit Singh (Dhadrianwale) on Mind-Body connection, health, and lifestyle.
+
