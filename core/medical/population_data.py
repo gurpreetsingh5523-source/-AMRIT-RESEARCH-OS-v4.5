@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Population Data v5.0
+AMRIT Population Data v4.5
 50+ populations worldwide with carrier frequencies
 """
 

@@ -21,10 +21,12 @@ Events:
     doctor.approved      → Doctor approved prescription
 """
 
+from __future__ import annotations
+
 import threading
 import logging
 import time
-from typing import Callable, Any
+from typing import Callable, Any, Optional
 from collections import defaultdict
 from datetime import datetime
 

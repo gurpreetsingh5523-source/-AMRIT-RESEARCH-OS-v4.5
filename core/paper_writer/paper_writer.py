@@ -21,18 +21,39 @@ class PaperWriter:
 
     CITATION_FORMATS = ['APA', 'MLA', 'IEEE', 'Vancouver', 'Harvard']
 
-    def __init__(self, citation_format: str = 'APA'):
+    def __init__(self, citation_format: str = 'APA', output_dir: str = 'reports'):
         self.citation_format = citation_format.upper()
+        self.output_dir = output_dir
         self.sections = []
         self.references = []
+        import os
+        os.makedirs(f"{output_dir}/pdf", exist_ok=True)
+        os.makedirs(f"{output_dir}/json", exist_ok=True)
 
-    def generate_paper(self, topic: str, findings: List[Dict], 
-                      format: str = None) -> Dict:
+    def generate_paper(self, topic: str = "", findings: List[Dict] = None, 
+                      format: str = None, hypothesis: str = "", result: dict = None,
+                      debate: dict = None, review: dict = None, sources: list = None,
+                      domain: str = "") -> Dict:
         """
         Generate a complete research paper
         """
         if format:
             self.citation_format = format.upper()
+
+        topic = topic or hypothesis or (f"Research in {domain}" if domain else "Scientific Hypothesis Analysis")
+        if findings is None:
+            findings = []
+            if sources:
+                for s in sources:
+                    findings.append({
+                        "source": s.get("journal", "ArXiv/PubMed"),
+                        "finding": s.get("title", "Literature finding")
+                    })
+            if result:
+                findings.append({
+                    "source": "StatisticalEngine",
+                    "finding": f"Hypothesis testing yielded p={result.get('p_value', 'N/A')}, verdict={result.get('verdict', 'N/A')}"
+                })
 
         paper = {
             'title': f"Research on {topic}: A Comprehensive Analysis",
@@ -42,7 +63,11 @@ class PaperWriter:
             'references': [],
             'format': self.citation_format,
             'word_count': 0,
-            'generated_at': datetime.now().isoformat()
+            'generated_at': datetime.now().isoformat(),
+            'hypothesis': hypothesis,
+            'result': result,
+            'debate': debate,
+            'review': review,
         }
 
         # Generate sections
@@ -107,7 +132,7 @@ class PaperWriter:
     def _generate_methods(self, findings: List[Dict]) -> PaperSection:
         """Generate methods section"""
         content = """
-        This study employed the AMRIT Research Operating System v6.0, an autonomous research platform integrating multiple analytical modules.
+        This study employed the AMRIT Research Operating System v4.5, an autonomous research platform integrating multiple analytical modules.
 
         Data Collection: Literature was mined from PubMed, ArXiv, OpenAlex, Semantic Scholar, and CrossRef databases using automated search algorithms.
 
@@ -220,3 +245,44 @@ class PaperWriter:
             md += f"- {ref}\n"
 
         return md
+
+    def auto_cite(self, sources: list) -> dict:
+        """Auto Citation generation (APA, MLA, IEEE)."""
+        year = datetime.now().year
+        apa, mla, ieee = [], [], []
+        for i, s in enumerate(sources, 1):
+            title = s.get("title", "Unknown Title")
+            authors = ", ".join(s.get("authors", ["AMRIT Researcher"])) or "AMRIT Researcher"
+            journal = s.get("journal", "Research Archive")
+            doi = s.get("doi", "")
+            doi_str = f" https://doi.org/{doi}" if doi else ""
+
+            apa.append(f"{authors} ({year}). {title}. {journal}.{doi_str}")
+            mla.append(f'{authors}. "{title}." {journal}, {year}.')
+            ieee.append(f'[{i}] {authors}, "{title}," {journal}, {year}.')
+
+        return {"apa": apa, "mla": mla, "ieee": ieee}
+
+    def export_json(self, paper: dict, path: str = "reports/json/research_paper.json") -> str:
+        """Export paper structure to JSON file."""
+        import json, os
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        # Convert PaperSection dataclasses to dict if present
+        serializable = dict(paper)
+        if "sections" in serializable:
+            serializable["sections"] = [
+                s.__dict__ if hasattr(s, "__dict__") else s for s in serializable["sections"]
+            ]
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(serializable, f, indent=2, default=str)
+        return path
+
+    def export_text_pdf(self, paper: dict, path: str = "reports/pdf/research_paper.txt") -> str:
+        """Export paper as formatted readable text report."""
+        import os
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        content = self.export_to_markdown(paper)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
+        return path
+

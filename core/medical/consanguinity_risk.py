@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Consanguinity Risk v5.0
+AMRIT Consanguinity Risk v4.5
 20 diseases, 6 relationship types (South Asian focus)
 """
 

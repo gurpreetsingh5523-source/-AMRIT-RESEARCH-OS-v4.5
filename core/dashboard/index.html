@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMRIT RESEARCH OS v5.0 — Dashboard</title>
+<title>AMRIT RESEARCH OS v4.5 — Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -221,14 +221,14 @@ body{
     <div class="logo-badge">A</div>
     <div>
       <div class="logo-text">AMRIT RESEARCH OS</div>
-      <div class="logo-sub">AUTONOMOUS SCIENTIFIC DISCOVERY ENGINE · v5.0</div>
+      <div class="logo-sub">AUTONOMOUS SCIENTIFIC DISCOVERY ENGINE · v4.5</div>
     </div>
   </div>
   <div class="hdr-right">
     <span class="session-id" id="sid">SESSION: —</span>
     <span class="badge" id="ollama-badge" style="border-color:#475569;color:#64748b;background:transparent">OLLAMA: OFFLINE</span>
     <span class="badge badge-info">QUANTUM: SIM</span>
-    <span class="badge badge-ok">v5.0 ✓</span>
+    <span class="badge badge-ok">v4.5 ✓</span>
     <span class="badge badge-dim">BY GURPREET SINGH</span>
   </div>
 </div>
@@ -244,6 +244,9 @@ body{
   <button class="tab" data-tab="heal" onclick="switchTab('heal')">Self-Heal</button>
   <button class="tab" data-tab="system" onclick="switchTab('system')">System</button>
   <span style="flex:1"></span>
+  <a href="/clinical" target="_blank" class="tab" style="text-decoration:none;color:#ff4d6d;font-weight:700;">🩺 CLINICAL ↗</a>
+  <a href="/medical" target="_blank" class="tab" style="text-decoration:none;color:#10b981;font-weight:700;">⚡ REALTIME ↗</a>
+  <a href="/models" target="_blank" class="tab" style="text-decoration:none;color:#38bdf8;font-weight:700;">🧠 MODELS ↗</a>
   <button class="tab" id="notif-bell" onclick="switchTab('scheduler')" title="Notifications">🔔 <span id="notif-count">0</span></button>
 </div>
 

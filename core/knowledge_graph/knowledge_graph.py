@@ -5,6 +5,7 @@ Stores and queries medical knowledge relationships
 """
 import sqlite3
 import json
+import os
 from typing import List, Dict, Tuple, Optional, Set
 from dataclasses import dataclass
 from contextlib import contextmanager
@@ -37,7 +38,8 @@ class KnowledgeGraph:
     - Subgraph extraction
     """
 
-    def __init__(self, db_path: str = "data/amrit_knowledge.db"):
+    def __init__(self, db_path: str = "data/knowledge_graph.db"):
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
         self.db_path = db_path
         self._init_database()
         self.graph = nx.DiGraph()
@@ -273,6 +275,77 @@ class KnowledgeGraph:
                     'confidence': row[4],
                     'evidence': json.loads(row[5]) if row[5] else []
                 })
+
+    def add_node(self, node_id: str, label: str = None, node_type: str = "concept"):
+        label = label or node_id
+        entity = Entity(id=node_id, name=label, entity_type=node_type, properties={}, source="v4.5")
+        self.add_entity(entity)
+
+    def add_edge(self, source: str, target: str, relation: str = "related_to", weight: float = 1.0):
+        if source not in self.graph:
+            self.add_node(source, source)
+        if target not in self.graph:
+            self.add_node(target, target)
+        rel_id = f"REL_{source}_{target}_{relation}"
+        rel = Relationship(id=rel_id, source_id=source, target_id=target, relation_type=relation, confidence=weight, evidence=[], properties={})
+        self.add_relationship(rel)
+
+    def node_count(self) -> int:
+        return self.graph.number_of_nodes()
+
+    def edge_count(self) -> int:
+        return self.graph.number_of_edges()
+
+    def summary(self) -> dict:
+        nodes = self.graph.number_of_nodes()
+        edges = self.graph.number_of_edges()
+        top_concepts = [data.get('name', n) for n, data in list(self.graph.nodes(data=True))[:10]]
+        return {
+            "nodes": nodes,
+            "edges": edges,
+            "top_concepts": top_concepts,
+            "total_entities": nodes,
+            "total_relationships": edges,
+        }
+
+    def build_from_hypothesis(self, hypothesis: str, domain: str = ""):
+        """Automatically extract concepts from hypothesis and add to graph."""
+        stop_words = {
+            "are", "is", "a", "an", "the", "in", "on", "at", "to", "for",
+            "of", "and", "or", "but", "with", "across", "between", "whether",
+            "does", "can", "do", "be", "not", "that", "this", "there",
+        }
+        words = [
+            w.strip("?,.'\"").lower()
+            for w in hypothesis.split()
+            if w.strip("?,.'\"").lower() not in stop_words and len(w) > 3
+        ]
+
+        if domain:
+            self.add_node(domain, domain, "domain")
+
+        prev = domain if domain else None
+        for word in words:
+            self.add_node(word, word, "concept")
+            if prev:
+                self.add_edge(prev, word, "related_to")
+            prev = word
+
+    def export_json(self, path: str = "reports/json/knowledge_graph.json") -> str:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        data = {
+            "nodes": [
+                {"id": n, "label": data.get("name", n), "type": data.get("type", "concept")}
+                for n, data in self.graph.nodes(data=True)
+            ],
+            "edges": [
+                {"source": u, "target": v, "relation": data.get("relation_type", "related_to")}
+                for u, v, data in self.graph.edges(data=True)
+            ],
+        }
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        return path
 
 # Pre-populated medical knowledge
 MEDICAL_KNOWLEDGE = {

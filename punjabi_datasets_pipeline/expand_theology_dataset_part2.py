@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Punjab Heritage, Comparative Theology & Gurmat Historiography Part 2 (Topics 26 to 50)
@@ -185,7 +186,7 @@ MORE_TOPICS = [
 ]
 
 def append_part2():
-    base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base_dir = str(Path(__file__).resolve().parent)
     out_file = os.path.join(base_dir, "punjab_history_theology_critical_corpus.jsonl")
 
     records = []

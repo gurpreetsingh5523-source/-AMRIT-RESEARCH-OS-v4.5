@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Production Hugging Face Dataset Uploader for Nam-toon-studio
@@ -75,7 +76,7 @@ def upload_to_huggingface(repo_name: str, local_jsonl: str, readme_md: str):
     return True
 
 def main():
-    base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base_dir = str(Path(__file__).resolve().parent)
 
     # Dataset 1: Punjabi Grammar Correction Corpus
     grammar_jsonl = os.path.join(base_dir, "punjabi_grammar_correction_corpus.jsonl")
@@ -116,7 +117,7 @@ pretty_name: Punjabi (Gurmukhi) Grammatical Error Correction Corpus
 ### 👨‍💻 Architect & Research Lead
 * **Creator / Developer:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **GitHub Organization:** [github.com/gurpreetsingh5523-source](https://github.com/gurpreetsingh5523-source)
-* **Flagship Project:** [AMRIT Research OS (Autonomous Medical AI)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Project:** [AMRIT Research OS (Autonomous Medical AI)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 
@@ -202,7 +203,7 @@ pretty_name: Gurbani & Bhai Kahn Singh Nabha Mahan Kosh Frontier Corpus
 ### 👨‍💻 Project Lead & Architecture
 * **Curator:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **GitHub:** [github.com/gurpreetsingh5523-source](https://github.com/gurpreetsingh5523-source)
-* **Flagship Project:** [AMRIT Research OS (100% Local Medical Intelligence)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Project:** [AMRIT Research OS (100% Local Medical Intelligence)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 

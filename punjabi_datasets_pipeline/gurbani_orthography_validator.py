@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Gurbani Viakaran & Classical Gurmukhi Orthographic Validator
@@ -116,7 +117,7 @@ class GurmukhiViakaranValidator:
         }
 
 def main():
-    base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base_dir = str(Path(__file__).resolve().parent)
     files = [
         "gurbani_mahankosh_expanded_corpus.jsonl",
         "punjab_history_theology_critical_corpus.jsonl",

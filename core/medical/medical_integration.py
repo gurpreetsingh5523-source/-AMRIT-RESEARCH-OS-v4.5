@@ -374,7 +374,7 @@ class MedicalReportBuilder:
                 f"ID:       {pid}\n"
                 f"Age:      {age}   |   Gender: {gender}\n"
                 f"Report:   {now.strftime('%Y-%m-%d %H:%M')}\n"
-                f"System:   AMRIT Research OS v4.0\n"
+                f"System:   AMRIT Research OS v4.5\n"
                 f"Status:   PENDING DOCTOR VERIFICATION\n"
                 f"WARNING:  AI-generated analysis — physician review mandatory"
             ),
@@ -600,7 +600,7 @@ The attached PDF contains:
 ⚠️ This report has been verified by a licensed physician before dispatch.
 
 Regards,
-AMRIT Research OS v4.0
+AMRIT Research OS v4.5
 {clinic}
 """
 

@@ -92,9 +92,14 @@ class AmritResearchOS:
 
         # ── Step 1: Generate Hypothesis ──
         # Use local AI if available, else rule-based
+        hypothesis = ""
         if self.ai.is_available():
-            hypothesis = self.ai.generate_hypothesis(self.domain)
-            log.info(f"AI Hypothesis (qwen3:14b): {hypothesis}")
+            try:
+                hypothesis = self.ai.generate_hypothesis(self.domain)
+            except Exception as e:
+                log.warning(f"AI hypothesis generation failed: {e}")
+        if hypothesis and not hypothesis.startswith("[Ollama"):
+            log.info(f"AI Hypothesis ({self.ai.model}): {hypothesis}")
         else:
             hypothesis = self.brain.generate_hypothesis(self.domain)
             log.info(f"Hypothesis: {hypothesis}")
@@ -239,14 +244,17 @@ class AmritResearchOS:
 
         # Use AI-generated abstract if available
         if self.ai.is_available():
-            ai_abstract = self.ai.write_abstract(hypothesis, result)
-            # Self-critique loop: draft -> critic -> improve (up to 3x)
-            refined = self.critic.run(ai_abstract, context=f"Hypothesis: {hypothesis}")
-            peer_review["ai_abstract"] = refined["final_draft"]
-            peer_review["critique_score"] = refined["final_score"]
-            peer_review["critique_cycles"] = refined["cycles_run"]
-            log.info(f"Self-critique: {refined['cycles_run']} cycle(s), "
-                     f"final score={refined['final_score']}")
+            try:
+                ai_abstract = self.ai.write_abstract(hypothesis, result)
+                if ai_abstract and not ai_abstract.startswith("[Ollama"):
+                    refined = self.critic.run(ai_abstract, context=f"Hypothesis: {hypothesis}")
+                    peer_review["ai_abstract"] = refined["final_draft"]
+                    peer_review["critique_score"] = refined["final_score"]
+                    peer_review["critique_cycles"] = refined["cycles_run"]
+                    log.info(f"Self-critique: {refined['cycles_run']} cycle(s), "
+                             f"final score={refined['final_score']}")
+            except Exception as e:
+                log.warning(f"AI abstract generation skipped: {e}")
 
         paper = self.writer.generate_paper(
             hypothesis=hypothesis,

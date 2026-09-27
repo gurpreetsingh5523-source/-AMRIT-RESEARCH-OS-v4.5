@@ -94,8 +94,8 @@ Or open the **Self-Heal** tab in the dashboard.
 
 ```bash
 # 1. Clone
-git clone https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0.git
-cd -AMRIT-RESEARCH-OS-v3.0
+git clone https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5.git
+cd -AMRIT-RESEARCH-OS-v4.5
 
 # 2. Install Python deps
 pip install fastapi uvicorn requests pyyaml numpy scipy

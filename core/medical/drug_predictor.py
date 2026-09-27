@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Drug Predictor v5.0
+AMRIT Drug Predictor v4.5
 13 biomarkers, 10 drug predictions (pharmacogenomics)
 """
 

@@ -38,7 +38,7 @@ class OllamaClient:
         except Exception:
             return []
 
-    def chat(self, prompt: str, system: str = "") -> str:
+    def chat(self, prompt: str, system: str = "", max_tokens: int = 512, timeout: int = 45) -> str:
         if not self.is_available():
             return "[Ollama offline] Run: ollama serve"
 
@@ -51,7 +51,7 @@ class OllamaClient:
             "model": self.model,
             "messages": messages,
             "stream": False,
-            "options": {"temperature": 0.7, "num_ctx": 4096},
+            "options": {"temperature": 0.7, "num_ctx": 4096, "num_predict": max_tokens},
         }).encode("utf-8")
 
         req = urllib.request.Request(
@@ -61,9 +61,15 @@ class OllamaClient:
             method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=300) as r:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
                 data = json.loads(r.read().decode())
-                return data.get("message", {}).get("content", "No response").strip()
+                msg = data.get("message", {})
+                content = (msg.get("content") or "").strip()
+                if not content and "thinking" in msg:
+                    think = (msg.get("thinking") or "").strip()
+                    lines = [l for l in think.split("\n") if l.strip()]
+                    content = lines[-1] if lines else think
+                return content or "No response"
         except Exception as e:
             return f"[Ollama error] {e}"
 
@@ -89,6 +95,8 @@ class OllamaClient:
         return self.chat(
             f"Generate a single novel testable research hypothesis in: {domain}. One sentence only.",
             system="You are a brilliant research scientist. Be specific and concise.",
+            max_tokens=128,
+            timeout=25,
         )
 
     def analyze_result(self, hypothesis: str, stats: dict) -> str:
@@ -97,6 +105,8 @@ class OllamaClient:
             f"effect_size: {stats.get('effect_size')}\nVerdict: {stats.get('verdict')}\n\n"
             f"Provide 2-sentence scientific interpretation.",
             system="You are a senior research analyst. Be concise.",
+            max_tokens=128,
+            timeout=25,
         )
 
     def debate_argument(self, role: str, hypothesis: str, stats: dict) -> str:
@@ -104,6 +114,8 @@ class OllamaClient:
             f"Hypothesis: {hypothesis}\nVerdict: {stats.get('verdict')}\n"
             f"Argue from role: {role} in 2 sentences.",
             system=f"You are the {role} in a scientific debate. Be direct.",
+            max_tokens=128,
+            timeout=25,
         )
 
     def write_abstract(self, hypothesis: str, result: dict) -> str:
@@ -112,4 +124,6 @@ class OllamaClient:
             f"p={result.get('p_value')}, effect_size={result.get('effect_size')}\n\n"
             f"Write a 3-sentence scientific abstract.",
             system="You are a scientific paper writer. Be professional.",
+            max_tokens=256,
+            timeout=30,
         )

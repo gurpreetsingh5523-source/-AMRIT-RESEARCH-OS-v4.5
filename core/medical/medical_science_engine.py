@@ -1,6 +1,6 @@
 """
 ╔══════════════════════════════════════════════════════════════════╗
-║  AMRIT RESEARCH OS v4 — Medical Science Engine                   ║
+║  AMRIT RESEARCH OS v4.5 — Medical Science Engine                 ║
 ║  core/medical/medical_science_engine.py                          ║
 ║                                                                  ║
 ║  ਅਸਲ ਵਿਗਿਆਨਕ ਔਜ਼ਾਰ — ਡਾਕਟਰਾਂ ਅਤੇ ਵਿਗਿਆਨੀਆਂ ਲਈ                ║

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Expanded Carrier Screening v5.0
+AMRIT Expanded Carrier Screening v4.5
 60+ diseases, cost analysis, population-specific frequencies
 """
 

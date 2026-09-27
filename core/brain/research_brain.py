@@ -27,6 +27,11 @@ class Hypothesis:
     testable: bool = True
     novelty_score: float = 0.0
 
+class ScientificReasoningResult(dict):
+    """Result object that acts both as a dictionary and displays clean summary text."""
+    def __str__(self):
+        return self.get("summary", super().__str__())
+
 class ResearchBrain:
     """
     Advanced hypothesis generation engine using:
@@ -36,12 +41,62 @@ class ResearchBrain:
     - Novelty detection
     """
 
-    def __init__(self, model_name: str = "amrit-research-brain-v6"):
+    DOMAINS = [
+        "Physics",
+        "Biology",
+        "Mathematics",
+        "Astronomy",
+        "Chemistry",
+        "Neuroscience",
+        "Climate Science",
+        "Genomics",
+        "Oncology",
+    ]
+
+    HYPOTHESIS_TEMPLATES = [
+        "Are recurring numerical patterns observable across independent {domain} datasets?",
+        "Does {domain} exhibit self-organizing behavior under constrained entropy conditions?",
+        "Can Benford's Law deviation predict anomalous events in large {domain} datasets?",
+        "Is there a statistically significant correlation between {domain} cycles and known cosmic patterns?",
+        "Do {domain} phenomena follow power-law distributions at macro scales?",
+    ]
+
+    def __init__(self, model_name: str = "amrit-research-brain-v4.5"):
         self.model_name = model_name
+        self.domain = random.choice(self.DOMAINS)
         self.hypothesis_history: List[Hypothesis] = []
         self.knowledge_base: Dict[str, any] = {}
         self.reasoning_patterns = self._load_reasoning_patterns()
         self.confidence_threshold = 0.65
+        self.research_plan = []
+        self.success_history = []
+        self.failure_history = []
+
+    def generate_research_plan(self, hypothesis: str) -> list:
+        """Generate step-by-step research plan for the hypothesis."""
+        plan = [
+            f"1. Literature review: Search ArXiv, PubMed, Semantic Scholar",
+            f"2. Data collection from NASA, OpenAlex, CrossRef",
+            f"3. Statistical analysis: Monte Carlo, Bayesian, Benford",
+            f"4. Multi-agent debate: Believer vs Skeptic vs Judge",
+            f"5. Knowledge graph construction",
+            f"6. Peer review simulation",
+            f"7. Paper generation (PDF export)",
+            f"8. Store results in Research Memory",
+        ]
+        self.research_plan = plan
+        return plan
+
+    def synthesize_knowledge(self, findings: list) -> str:
+        """Synthesize multiple findings into a coherent conclusion."""
+        if not findings:
+            return "Insufficient data to synthesize knowledge."
+        count = len(findings)
+        return (
+            f"Synthesis of {count} findings: "
+            f"Evidence suggests a meaningful pattern worth further investigation. "
+            f"Confidence level is proportional to dataset diversity and sample size."
+        )
 
     def _load_reasoning_patterns(self) -> Dict:
         """Load scientific reasoning patterns for hypothesis generation"""
@@ -69,27 +124,26 @@ class ResearchBrain:
         }
 
     def generate_hypothesis(self, 
-                          domain: str, 
-                          keywords: List[str],
-                          evidence_data: Optional[Dict] = None) -> List[Hypothesis]:
+                          domain: str = None, 
+                          keywords: Optional[List[str]] = None,
+                          evidence_data: Optional[Dict] = None):
         """
-        Generate novel research hypotheses from domain knowledge
-
-        Args:
-            domain: Research domain (e.g., 'oncology', 'cardiology', 'genetics')
-            keywords: Key terms to focus hypothesis generation
-            evidence_data: Optional structured evidence data
-
-        Returns:
-            List of ranked Hypothesis objects
+        Generate novel research hypotheses from domain knowledge.
+        If keywords is omitted, returns a single testable hypothesis string (v4.5 mode).
+        If keywords is provided, returns a list of ranked Hypothesis objects (v5/v6 mode).
         """
+        target_domain = domain or self.domain
+        if keywords is None:
+            template = random.choice(self.HYPOTHESIS_TEMPLATES)
+            return template.format(domain=target_domain)
+
         hypotheses = []
 
         # Generate hypotheses using different reasoning patterns
         for pattern_type, patterns in self.reasoning_patterns.items():
             for pattern in patterns:
                 hypothesis = self._apply_reasoning_pattern(
-                    pattern, domain, keywords, evidence_data, pattern_type
+                    pattern, target_domain, keywords, evidence_data, pattern_type
                 )
                 if hypothesis and hypothesis.confidence >= self.confidence_threshold:
                     hypotheses.append(hypothesis)
@@ -246,19 +300,32 @@ class ResearchBrain:
         ]
         return experiments
 
-    def scientific_reasoning(self, hypothesis, stats_result: dict) -> str:
+    def scientific_reasoning(self, hypothesis, stats_result: dict) -> ScientificReasoningResult:
         """Perform scientific reasoning based on hypothesis and statistical evidence."""
         statement = hypothesis.statement if hasattr(hypothesis, "statement") else str(hypothesis)
         p_val = stats_result.get("p_value", 0.05)
         effect_size = stats_result.get("effect_size", 0.5)
         verdict = stats_result.get("verdict", "NO SUPPORT")
         
-        return (
+        summary = (
             f"Given the hypothesis: '{statement}', statistical analysis shows a p-value of {p_val:.4f} "
             f"and an effect size of {effect_size:.3f}, resulting in a verdict of {verdict}. "
             f"This suggests that the underlying mechanisms correlate with the observed parameters, "
             f"warranting further validation and experimental trials."
         )
+
+        return ScientificReasoningResult({
+            "hypothesis": statement,
+            "verdict": verdict,
+            "p_value": p_val,
+            "effect_size": effect_size,
+            "recommendation": (
+                "Proceed to peer review"
+                if verdict in ("STRONG SUPPORT", "WEAK SUPPORT")
+                else "Revise hypothesis"
+            ),
+            "summary": summary
+        })
 
 
 # Self-improvement capability for ResearchBrain

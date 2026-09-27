@@ -1,11 +1,11 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════
-#  AMRIT RESEARCH OS v5.0 — ਚਲਾਉਣ ਲਈ ਇਹ ਫਾਈਲ
+#  AMRIT RESEARCH OS v4.5 — ਚਲਾਉਣ ਲਈ ਇਹ ਫਾਈਲ
 #  ਵਰਤੋਂ:  bash START_AMRIT.sh
 # ═══════════════════════════════════════════════════════
 
 echo "╔══════════════════════════════════════════╗"
-echo "║   AMRIT RESEARCH OS v5.0 — Starting       ║"
+echo "║   AMRIT RESEARCH OS v4.5 — Starting       ║"
 echo "╚══════════════════════════════════════════╝"
 
 # 1. Check Python

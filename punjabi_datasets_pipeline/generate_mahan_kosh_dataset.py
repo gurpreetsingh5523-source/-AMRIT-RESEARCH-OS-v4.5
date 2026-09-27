@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Bhai Kahn Singh Nabha Mahan Kosh Comprehensive Frontier Corpus Generator (v2.0)
@@ -538,7 +539,7 @@ ENTRIES = [
 ]
 
 def main():
-    base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base_dir = str(Path(__file__).resolve().parent)
     os.makedirs(base_dir, exist_ok=True)
     out_file = os.path.join(base_dir, "gurbani_mahankosh_expanded_corpus.jsonl")
 
