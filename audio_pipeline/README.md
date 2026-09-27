@@ -49,4 +49,21 @@ python3 audio_pipeline/youtube_punjabi_audio_pipeline.py \
   - **91 verified 16kHz mono speech clips** (~16.5 minutes total audio).
   - Includes both `transcription` (100% human-verified, grammatically curated Gurmukhi) and `raw_transcription` (unprocessed CTC acoustic ASR output).
   - Speaker: Bhai Ranjit Singh (Dhadrianwale) on Mind-Body connection, health, and lifestyle.
+- **[Nam-toon-studio/Punjabi-MultiSpeaker-Studio-TTS-Corpus](https://huggingface.co/datasets/Nam-toon-studio/Punjabi-MultiSpeaker-Studio-TTS-Corpus)**:
+  - **145 high-fidelity studio clips** (22,050Hz mono, 22.8 minutes total audio).
+  - Multi-speaker voices: Bhai Ranjit Singh, Dr. Surjit Patar, BBC Punjabi Broadcaster.
+
+---
+
+### 🔊 Sovereign Punjabi Neural TTS (Text-to-Speech)
+- **Model on Hugging Face**: **[Nam-toon-studio/punjabi-tts-voices](https://huggingface.co/Nam-toon-studio/punjabi-tts-voices)**
+- **Architecture**: 114MB VITS Gurmukhi Neural Synthesis Engine (ONNX).
+- **Run & Play Punjabi Speech via Speakers**:
+```bash
+# Generate Punjabi speech and listen immediately:
+python3 audio_pipeline/test_and_play_tts.py --text "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ ਜੀ, ਅੰਮ੍ਰਿਤ ਰਿਸਰਚ ਓ.ਐਸ. ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ।"
+
+# Download directly from Hugging Face Hub and play:
+python3 audio_pipeline/test_and_play_tts.py --download-hf --text "ਪੰਜਾਬੀ ਬੋਲਣ ਵਾਲਾ ਮਾਡਲ ਹੁਣ ਪੂਰੀ ਤਰ੍ਹਾਂ ਤਿਆਰ ਹੈ।"
+```
 
