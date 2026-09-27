@@ -47,12 +47,13 @@ Punjabi is the 10th most spoken language globally, with over 130 million native 
 3. What We Have Built & Published (1,300+ Total Community Downloads):
 - Nam-toon-studio/sahaj-30m: Lightweight 30.6M parameter Gurmukhi causal LM achieving 0.149 Bits-Per-Byte with sub-millisecond edge latency (~115MB RAM). (669 downloads)
 - Nam-toon-studio/sahaj-86m: 86M parameter model checkpoint with BPE tokenizer. (208 downloads)
-- Curated & verified 5 frontier Gurmukhi datasets with interactive Parquet viewers:
+- Curated & verified frontier Gurmukhi datasets with interactive Parquet viewers:
   * Punjabi-Gurmukhi-Grammar-Correction-Corpus (1,140 verified error-correction pairs)
   * Gurbani-MahanKosh-Frontier-Corpus (encyclopedic etymology)
   * Punjab-Heritage-Gurmat-Theology-Corpus (deep philosophical discourse)
   * Punjabi-STEM-Frontier-CoT-Corpus (STEM reasoning with chain-of-thought)
   * Punjabi-Studio-Voice-Corpus (clean speech audio dataset)
+  * Punjabi-Conversational-Speech-Corpus (clean live conversational speech corpus, 16kHz mono WAV + Gurmukhi transcriptions)
 
 4. Compute Resources Requested:
 - Hardware: 1x to 4x NVIDIA A100 (80GB) or H100 GPU compute slice (or equivalent Hugging Face compute credits for ~500-1,000 GPU hours) to pre-train Sahaj-0.5B and Sahaj-1.5B models on 5B+ verified Punjabi tokens.
