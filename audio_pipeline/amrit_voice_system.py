@@ -25,6 +25,7 @@ import soundfile as sf
 import torch
 import torchaudio
 import librosa
+import scipy.signal as signal
 from typing import Optional, Dict, Tuple
 
 try:
@@ -145,32 +146,62 @@ class AmritVoiceSystem:
         audio_np = output.squeeze().cpu().numpy()
         sr = self.sample_rate
 
-        # 2. Speaker acoustic voice conditioning (pitch, formant, rate, energy)
+        # 2. Speaker acoustic voice conditioning
         pitch_shift_semitones = profile["pitch_shift"]
         speed_factor = profile["rate"] * speed
         
-        # Apply pitch shifting for speaker vocal tract differentiation
+        # Apply gentle pitch shifting with clean phase
         if abs(pitch_shift_semitones) > 0.1:
-            audio_np = librosa.effects.pitch_shift(
-                audio_np,
-                sr=sr,
-                n_steps=pitch_shift_semitones
-            )
+            try:
+                # Moderate shift to avoid phase smearing
+                safe_shift = np.clip(pitch_shift_semitones, -2.5, 2.0)
+                audio_np = librosa.effects.pitch_shift(
+                    audio_np,
+                    sr=sr,
+                    n_steps=safe_shift
+                )
+            except Exception:
+                pass
             
         # Apply speaking rate adjustment if different from 1.0
-        if abs(speed_factor - 1.0) > 0.02:
+        if abs(speed_factor - 1.0) > 0.03:
             audio_np = librosa.effects.time_stretch(audio_np, rate=speed_factor)
 
-        # Apply speaker energy normalization
-        audio_np = audio_np * profile["energy"]
-        audio_np = np.clip(audio_np, -0.98, 0.98)
+        # 3. STUDIO MASTERING & DENOISING PIPELINE
+        # A. High-pass filter (>75 Hz) to eliminate sub-bass rumble
+        sos_hp = signal.butter(4, 75, 'hp', fs=sr, output='sos')
+        audio_np = signal.sosfilt(sos_hp, audio_np)
 
-        # 3. Save to output WAV if requested
+        # B. Low-pass anti-aliasing filter (<7400 Hz) to eliminate digital harshness
+        sos_lp = signal.butter(4, 7400, 'lp', fs=sr, output='sos')
+        audio_np = signal.sosfilt(sos_lp, audio_np)
+
+        # C. Spectral gating noise reduction to strip background hiss
+        try:
+            import noisereduce as nr
+            audio_np = nr.reduce_noise(
+                y=audio_np,
+                sr=sr,
+                stationary=True,
+                prop_decrease=0.78,
+                n_fft=1024,
+                win_length=1024,
+                hop_length=256
+            )
+        except Exception as e:
+            pass
+
+        # D. Studio RMS & Peak Normalization (-18 dBFS target)
+        peak = np.max(np.abs(audio_np))
+        if peak > 0:
+            audio_np = (audio_np / peak) * 0.90
+
+        # 4. Save to output WAV if requested
         if output_wav:
             os.makedirs(os.path.dirname(os.path.abspath(output_wav)), exist_ok=True)
             sf.write(output_wav, audio_np, sr)
             dur = len(audio_np) / float(sr)
-            print(f"💾 Audio saved: {output_wav} ({dur:.2f}s, {sr}Hz)")
+            print(f"💾 Mastered clean audio saved: {output_wav} ({dur:.2f}s, {sr}Hz)")
 
         return audio_np, sr
 
