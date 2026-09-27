@@ -15,7 +15,7 @@
 - ਭਵਿੱਖ: Raspberry Pi ਤੇ **Robot Doctor (~$150/unit)**
 - Sikh philosophy + Punjabi language ਨਾਲ ਜੁੜਿਆ
 - Developer: **Gurpreet Singh**
-- GitHub: `github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0`
+- GitHub: `github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5`
 - MacBook (Apple M-series) ਤੇ ਬਣ ਰਿਹਾ
 
 ---

@@ -460,3 +460,15 @@ class StatisticalEngine:
             "monte_carlo": {"pi_estimate": 3.1415, "iterations": 10000}
         }
 
+    def bayesian_update(self, prior: float = 0.5, likelihood: float = 0.8, evidence: float = 0.6) -> dict:
+        """Bayesian posterior: P(H|E) = P(E|H)P(H)/P(E)."""
+        posterior = (likelihood * prior) / evidence if evidence > 0 else 0.0
+        return {
+            "method": "Bayesian",
+            "prior": prior,
+            "likelihood": likelihood,
+            "evidence": evidence,
+            "posterior": round(min(posterior, 1.0), 4),
+        }
+
+

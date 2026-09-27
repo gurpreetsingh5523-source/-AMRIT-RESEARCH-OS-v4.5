@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Punjabi STEM & Mathematics Frontier Reasoning (CoT) Dataset Generator
@@ -381,7 +382,7 @@ def generate_expanded_stem_corpus(base_dataset: List[Dict[str, Any]]) -> List[Di
     return expanded
 
 def main():
-    output_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    output_dir = str(Path(__file__).resolve().parent)
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "punjabi_stem_frontier_cot_corpus.jsonl")
 

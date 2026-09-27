@@ -11,7 +11,7 @@ echo "╚═══════════════════════�
 
 # ਚੈੱਕ ਸਹੀ folder
 if [ ! -f "server.py" ]; then
-    echo "❌ ਗਲਤ folder। ਪਹਿਲਾਂ: cd ~/-AMRIT-RESEARCH-OS-v3.0"
+    echo "❌ ਗਲਤ folder। ਪਹਿਲਾਂ: cd ~/-AMRIT-RESEARCH-OS-v4.5"
     exit 1
 fi
 echo "✅ Project folder ਮਿਲਿਆ"
@@ -19,7 +19,7 @@ echo "✅ Project folder ਮਿਲਿਆ"
 # Git setup
 [ ! -d ".git" ] && git init && git branch -M main
 git remote | grep -q origin || \
-    git remote add origin https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0.git
+    git remote add origin https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5.git
 
 # .gitignore
 cat > .gitignore << 'GITEOF'
@@ -71,7 +71,7 @@ if command -v gh &> /dev/null; then
 else
     echo ""
     echo "📋 Manual release (gh CLI ਨਹੀਂ ਹੈ):"
-    echo "   https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0/releases/new"
+    echo "   https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5/releases/new"
     echo "   Tag: v4.5 | Title: AMRIT RESEARCH OS v4.5"
 fi
 

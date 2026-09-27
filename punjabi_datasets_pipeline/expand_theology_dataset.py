@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Punjab Heritage, Comparative Theology & Gurmat Historiography Corpus Generator (Expanded v2.0)
@@ -13,7 +14,7 @@ def norm(text: str) -> str:
     return unicodedata.normalize('NFC', text.strip())
 
 def build_comprehensive_theology_corpus():
-    base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base_dir = str(Path(__file__).resolve().parent)
     out_file = os.path.join(base_dir, "punjab_history_theology_critical_corpus.jsonl")
 
     # Load existing 8 records if available

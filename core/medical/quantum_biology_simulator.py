@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Quantum Biology Simulator v5.0
+AMRIT Quantum Biology Simulator v4.5
 6 biological systems, research reports
 """
 

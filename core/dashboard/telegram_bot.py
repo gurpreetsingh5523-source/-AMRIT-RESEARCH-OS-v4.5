@@ -5,7 +5,7 @@ Multi-platform messaging integration
 import os
 import json
 import asyncio
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 from datetime import datetime
 
 try:
@@ -14,7 +14,12 @@ try:
     TELEGRAM_AVAILABLE = True
 except ImportError:
     TELEGRAM_AVAILABLE = False
-    print("Warning: python-telegram-bot not installed. Install with: pip install python-telegram-bot")
+    Update = Any
+    InlineKeyboardButton = Any
+    InlineKeyboardMarkup = Any
+    class _ContextTypes:
+        DEFAULT_TYPE = Any
+    ContextTypes = _ContextTypes
 
 class AMRITTelegramBot:
     """
@@ -27,10 +32,10 @@ class AMRITTelegramBot:
         self.application = None
         self.user_sessions = {}
 
-    async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+    async def start(self, update: Update, context: Any):
         """Handle /start command"""
         welcome_text = """
-🕉️ *Welcome to AMRIT Research OS v6.1*
+🕉️ *Welcome to AMRIT Research OS v4.5*
 
 "ਸਰਬੱਤ ਦਾ ਭਲਾ" - Welfare of All Humanity
 

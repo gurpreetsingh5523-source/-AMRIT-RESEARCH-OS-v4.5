@@ -36,7 +36,9 @@ class MemoryManager:
     - Thread-safe operations
     """
 
-    def __init__(self, db_path: str = "data/amrit_memory.db"):
+    def __init__(self, db_path: str = "data/research.db"):
+        import os
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
         self.db_path = db_path
         self.lock = threading.RLock()
         self._init_database()
@@ -74,6 +76,52 @@ class MemoryManager:
                     key TEXT PRIMARY KEY,
                     value TEXT,
                     updated_at TEXT
+                )
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS findings (
+                    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                    hypothesis   TEXT NOT NULL,
+                    domain       TEXT,
+                    dataset      TEXT,
+                    result       TEXT,
+                    verdict      TEXT,
+                    p_value      REAL,
+                    effect_size  REAL,
+                    date         TEXT DEFAULT (datetime('now')),
+                    citation_apa TEXT,
+                    citation_mla TEXT,
+                    citation_ieee TEXT
+                )
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS hypothesis_evolution (
+                    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                    original        TEXT,
+                    revised         TEXT,
+                    reason          TEXT,
+                    evolved_at      TEXT DEFAULT (datetime('now'))
+                )
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS agent_reviews (
+                    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                    finding_id   INTEGER REFERENCES findings(id),
+                    agent_name   TEXT,
+                    review       TEXT,
+                    reviewed_at  TEXT DEFAULT (datetime('now'))
+                )
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS self_evolution (
+                    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                    category     TEXT,
+                    content      TEXT,
+                    recorded_at  TEXT DEFAULT (datetime('now'))
                 )
             """)
 
@@ -221,6 +269,112 @@ class MemoryManager:
             access_count=row[6],
             last_accessed=row[7]
         )
+
+    # ─────────────────────────── v4.5 Findings & Evolution ───────────────────────────
+
+    def store_result(
+        self,
+        hypothesis: str,
+        result: dict,
+        domain: str = "",
+        dataset: str = "",
+    ) -> int:
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                """
+                INSERT INTO findings
+                    (hypothesis, domain, dataset, result, verdict, p_value, effect_size)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    hypothesis,
+                    domain,
+                    dataset,
+                    str(result),
+                    result.get("verdict", ""),
+                    result.get("p_value", None),
+                    result.get("effect_size", None),
+                ),
+            )
+            conn.commit()
+            return cur.lastrowid
+
+    def store_agent_review(
+        self, finding_id: int, agent_name: str, review: str
+    ):
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO agent_reviews (finding_id, agent_name, review) VALUES (?,?,?)",
+                (finding_id, agent_name, review),
+            )
+            conn.commit()
+
+    def record_evolution(self, category: str, content: str):
+        """Record a lesson learned (failed/successful hypothesis, best method)."""
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO self_evolution (category, content) VALUES (?,?)",
+                (category, content),
+            )
+            conn.commit()
+
+    def update_citations(self, finding_id: int, apa: str, mla: str, ieee: str):
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                """
+                UPDATE findings
+                SET citation_apa=?, citation_mla=?, citation_ieee=?
+                WHERE id=?
+                """,
+                (apa, mla, ieee, finding_id),
+            )
+            conn.commit()
+
+    def get_all_findings(self) -> list:
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM findings ORDER BY date DESC")
+            return cur.fetchall()
+
+    def get_successful_hypotheses(self) -> list:
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT hypothesis, verdict, p_value FROM findings WHERE verdict IN ('STRONG SUPPORT','WEAK SUPPORT')"
+            )
+            return cur.fetchall()
+
+    def get_failed_hypotheses(self) -> list:
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT hypothesis, verdict FROM findings WHERE verdict = 'NOT SUPPORTED' OR verdict = 'NO SUPPORT'"
+            )
+            return cur.fetchall()
+
+    def get_evolution_lessons(self) -> list:
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT category, content, recorded_at FROM self_evolution ORDER BY recorded_at DESC")
+            return cur.fetchall()
+
+    def summary(self) -> dict:
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) FROM findings")
+            total = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM findings WHERE verdict IN ('STRONG SUPPORT','WEAK SUPPORT')")
+            successes = cur.fetchone()[0]
+            return {
+                "total_experiments": total,
+                "successful": successes,
+                "failed": total - successes,
+            }
+
 
 
 class VectorMemory:

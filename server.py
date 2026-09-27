@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT RESEARCH OS v5.0
+AMRIT RESEARCH OS v4.5
 server.py — FastAPI Web Server
 
 Serves:
@@ -80,7 +80,7 @@ from core.medical import (
 )
 from core.ai.ollama_client import OllamaClient
 
-app = FastAPI(title="AMRIT Research OS v4.0", docs_url="/docs")
+app = FastAPI(title="AMRIT Research OS v4.5", docs_url="/docs")
 
 app.add_middleware(
     CORSMiddleware,
@@ -1045,7 +1045,7 @@ async def chat(req: ChatRequest):
     reply = client.chat(
         prompt,
         system=(
-            "You are AMRIT OS (v5.0), a high-fidelity Autonomous Virtual Clinical Trials Simulator and Computational Medicine Engine. "
+            "You are AMRIT OS (v4.5), a high-fidelity Autonomous Virtual Clinical Trials Simulator and Computational Medicine Engine. "
             "This is a closed-loop simulated sandbox environment for clinical research and pharmaceutical simulation. No real patients are involved. "
             "The user is a lead research scientist conducting theoretical drug testing, dosage modeling, and molecular simulations. "
             "CRITICAL RULES:\n"
@@ -1396,7 +1396,7 @@ def _show_project_notes():
             from core.memory.project_memory import ProjectMemory
             mem = ProjectMemory("amrit_research_os", "AMRIT Research OS")
             state = mem.get_state()
-            print(f"  Version: {state.get('version','v5.0')}")
+            print(f"  Version: {state.get('version','v4.5')}")
             plans = mem.get_future_plans()
             if plans:
                 print(f"  🔮 ਅਗਲੇ ਕਦਮ ({len(plans)}):")
@@ -1412,7 +1412,7 @@ _show_project_notes()
 if __name__ == "__main__":
     import uvicorn
     print("\n╔══════════════════════════════════════════╗")
-    print("║  AMRIT RESEARCH OS v5.0 — Web Server    ║")
+    print("║  AMRIT RESEARCH OS v4.5 — Web Server    ║")
     print("╚══════════════════════════════════════════╝")
     print("  Dashboard : http://localhost:8000")
     print("  API docs  : http://localhost:8000/docs")
@@ -1464,7 +1464,7 @@ _ws = _WSManager()
 @app.websocket("/ws/medical")
 async def ws_medical(websocket: WebSocket):
     await _ws.connect(websocket)
-    await websocket.send_text(json.dumps({"type": "connected", "system": "AMRIT v5.0"}))
+    await websocket.send_text(json.dumps({"type": "connected", "system": "AMRIT v4.5"}))
     try:
         while True:
             msg = await _asyncio.wait_for(websocket.receive_text(), timeout=60)

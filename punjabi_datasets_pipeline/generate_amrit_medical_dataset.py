@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 AMRIT Punjabi Clinical Dialogue & Medical Diagnosis Dataset Generator
@@ -460,7 +461,7 @@ def generate_expanded_clinical_corpus(base_dataset: List[Dict[str, Any]]) -> Lis
     return expanded
 
 def main():
-    output_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    output_dir = str(Path(__file__).resolve().parent)
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "amrit_punjabi_clinical_dialogue_corpus.jsonl")
 

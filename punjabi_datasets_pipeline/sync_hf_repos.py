@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Sync HF Repos with Git and Push
@@ -67,7 +68,7 @@ def git_upload(repo_name, files_dict):
     shutil.rmtree(temp_dir)
 
 def main():
-    base_dir = '/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline'
+    base_dir = str(Path(__file__).resolve().parent)
 
     grammar_readme = '''---
 license: apache-2.0
@@ -96,7 +97,7 @@ pretty_name: Punjabi (Gurmukhi) Grammatical Error Correction Corpus
 
 <p align="center">
   <a href="https://github.com/gurpreetsingh5523-source"><img src="https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github" alt="GitHub"></a>
-  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
+  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
   <img src="https://img.shields.io/badge/Language-Punjabi%20(Gurmukhi)-blue?style=for-the-badge" alt="Language">
   <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge" alt="License">
 </p>
@@ -106,7 +107,7 @@ pretty_name: Punjabi (Gurmukhi) Grammatical Error Correction Corpus
 ### 👨‍💻 Research & Engineering Lead
 * **Creator & Architect:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **GitHub Profile:** [github.com/gurpreetsingh5523-source](https://github.com/gurpreetsingh5523-source)
-* **Flagship Innovation:** [AMRIT Research OS (100% Locally-Run Autonomous Medical AI)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Innovation:** [AMRIT Research OS (100% Locally-Run Autonomous Medical AI)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 
@@ -168,7 +169,7 @@ pretty_name: Gurbani & Bhai Kahn Singh Nabha Mahan Kosh Frontier Corpus
 
 <p align="center">
   <a href="https://github.com/gurpreetsingh5523-source"><img src="https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github" alt="GitHub"></a>
-  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
+  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
   <img src="https://img.shields.io/badge/Lexicon-Mahan%20Kosh-red?style=for-the-badge" alt="Lexicon">
   <img src="https://img.shields.io/badge/Language-Punjabi%20(Gurmukhi)-blue?style=for-the-badge" alt="Language">
 </p>
@@ -178,7 +179,7 @@ pretty_name: Gurbani & Bhai Kahn Singh Nabha Mahan Kosh Frontier Corpus
 ### 👨‍💻 Project Lead & Architecture
 * **Curator & Developer:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **GitHub Profile:** [github.com/gurpreetsingh5523-source](https://github.com/gurpreetsingh5523-source)
-* **Flagship Project:** [AMRIT Research OS (Autonomous Medical AI)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Project:** [AMRIT Research OS (Autonomous Medical AI)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 
@@ -221,7 +222,7 @@ pretty_name: AMRIT Punjabi Clinical Dialogue & Medical Diagnosis Corpus
 
 <p align="center">
   <a href="https://github.com/gurpreetsingh5523-source"><img src="https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github" alt="GitHub"></a>
-  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
+  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
   <img src="https://img.shields.io/badge/Domain-Healthcare%20%26%20Medicine-red?style=for-the-badge" alt="Domain">
   <img src="https://img.shields.io/badge/Language-Punjabi%20(Gurmukhi)-blue?style=for-the-badge" alt="Language">
   <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge" alt="License">
@@ -232,7 +233,7 @@ pretty_name: AMRIT Punjabi Clinical Dialogue & Medical Diagnosis Corpus
 ### 👨‍💻 Research & Medical AI Architecture
 * **Lead Developer:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **Mission:** **Free Autonomous AI Doctor for Humanity (ਦੁਨੀਆਂ ਦੇ ਲੋੜਵੰਦ ਲੋਕਾਂ ਲਈ ਮੁਫ਼ਤ AI ਡਾਕਟਰ)**
-* **Flagship Platform:** [AMRIT Research OS (100% Local Medical Intelligence)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Platform:** [AMRIT Research OS (100% Local Medical Intelligence)](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 
@@ -327,7 +328,7 @@ pretty_name: Punjabi (Gurmukhi) STEM & Frontier Chain-of-Thought (CoT) Corpus
 
 <p align="center">
   <a href="https://github.com/gurpreetsingh5523-source"><img src="https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github" alt="GitHub"></a>
-  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0"><img src="https://img.shields.io/badge/Project-Sehaj%20AI-orange?style=for-the-badge" alt="Sehaj AI"></a>
+  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5"><img src="https://img.shields.io/badge/Project-Sehaj%20AI-orange?style=for-the-badge" alt="Sehaj AI"></a>
   <img src="https://img.shields.io/badge/Domain-STEM%20%26%20Quantum-purple?style=for-the-badge" alt="STEM">
   <img src="https://img.shields.io/badge/Language-Punjabi%20(Gurmukhi)-blue?style=for-the-badge" alt="Language">
   <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge" alt="License">
@@ -338,7 +339,7 @@ pretty_name: Punjabi (Gurmukhi) STEM & Frontier Chain-of-Thought (CoT) Corpus
 ### 👨‍💻 Research & Engineering Architecture
 * **Architect & Developer:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **Vision:** Sovereign Indic Intelligence & Advanced Scientific Reasoning in Gurmukhi.
-* **Flagship Innovation:** [AMRIT Research OS & Sehaj Sovereign Neural Model](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Innovation:** [AMRIT Research OS & Sehaj Sovereign Neural Model](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 
@@ -410,7 +411,7 @@ pretty_name: Punjab Heritage, Gurmat Philosophy & Comparative Theology Corpus
 
 <p align="center">
   <a href="https://github.com/gurpreetsingh5523-source"><img src="https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github" alt="GitHub"></a>
-  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
+  <a href="https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5"><img src="https://img.shields.io/badge/Project-AMRIT%20OS-crimson?style=for-the-badge" alt="Project AMRIT"></a>
   <img src="https://img.shields.io/badge/Domain-Theology%20%26%20Sikh%20History-navy?style=for-the-badge" alt="Domain">
   <img src="https://img.shields.io/badge/Language-Punjabi%20(Gurmukhi)-blue?style=for-the-badge" alt="Language">
   <img src="https://img.shields.io/badge/License-CC--BY--SA--4.0-green?style=for-the-badge" alt="License">
@@ -421,7 +422,7 @@ pretty_name: Punjab Heritage, Gurmat Philosophy & Comparative Theology Corpus
 ### 👨‍💻 Research & Academic Architecture
 * **Lead Researcher & Curator:** **Gurpreet Singh Dhillon (Nam-toon Studio)**
 * **Mission:** Authentic, Uncompromised, Source-Based Gurmat & Indic Historiography for Sovereign Artificial Intelligence.
-* **Flagship Platform:** [AMRIT Research OS & Sehaj Sovereign AI](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v3.0)
+* **Flagship Platform:** [AMRIT Research OS & Sehaj Sovereign AI](https://github.com/gurpreetsingh5523-source/-AMRIT-RESEARCH-OS-v4.5)
 
 ---
 

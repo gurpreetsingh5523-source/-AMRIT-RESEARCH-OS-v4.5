@@ -328,4 +328,67 @@ class DataCollector:
         except Exception as e:
             print(f"DOI fetch error: {e}")
 
-        return None
+    def search_nasa(self, query: str, max_results: int = 5) -> list:
+        """Search NASA Technical Reports Server."""
+        import urllib.parse
+        q = urllib.parse.quote(query)
+        url = f"https://ntrs.nasa.gov/api/citations/search?keyword={q}&rows={max_results}"
+        try:
+            resp = self._rate_limited_request(url)
+            data = resp.json()
+            results = []
+            for item in data.get("results", []):
+                results.append({
+                    "source": "NASA",
+                    "title": item.get("title", ""),
+                    "summary": item.get("abstract", "")[:200],
+                    "id": item.get("id", ""),
+                })
+            return results
+        except Exception as e:
+            return [{"source": "NASA", "error": str(e)}]
+
+    def reliability_score(self, source: str) -> int:
+        scores = {
+            "NASA": 95,
+            "PubMed": 98,
+            "ArXiv": 85,
+            "OpenAlex": 80,
+            "SemanticScholar": 82,
+            "CrossRef": 88,
+        }
+        return scores.get(source, 80)
+
+    def collect_all(self, query: str, max_per_source: int = 3) -> dict:
+        """Collect from all sources in v4.5 format."""
+        def _to_dict_list(papers, src_name):
+            res = []
+            for p in papers:
+                if isinstance(p, dict):
+                    res.append(p)
+                elif hasattr(p, 'title'):
+                    res.append({
+                        "source": getattr(p, 'source', src_name),
+                        "title": getattr(p, 'title', ''),
+                        "summary": getattr(p, 'abstract', '')[:200],
+                        "link": getattr(p, 'url', ''),
+                        "doi": getattr(p, 'doi', '') or '',
+                        "authors": getattr(p, 'authors', []),
+                    })
+            return res
+
+        arxiv_raw = self.search_arxiv(query, max_results=max_per_source)
+        pubmed_raw = self.search_pubmed(query, max_results=max_per_source)
+        openalex_raw = self.search_openalex(query, max_results=max_per_source)
+        sem_raw = self.search_semantic_scholar(query, max_results=max_per_source)
+        cross_raw = self.search_crossref(query, max_results=max_per_source)
+        nasa_raw = self.search_nasa(query, max_results=max_per_source)
+
+        return {
+            "arxiv": _to_dict_list(arxiv_raw, "ArXiv"),
+            "pubmed": _to_dict_list(pubmed_raw, "PubMed"),
+            "nasa": nasa_raw,
+            "openalex": _to_dict_list(openalex_raw, "OpenAlex"),
+            "semantic_scholar": _to_dict_list(sem_raw, "SemanticScholar"),
+            "crossref": _to_dict_list(cross_raw, "CrossRef"),
+        }

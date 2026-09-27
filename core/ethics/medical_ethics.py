@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Ethics Filter v5.0
+AMRIT Ethics Filter v4.5
 Gurmat (Sikh ethics) + Medical ethics integration
 Eugenics blocking, cultural sensitivity framework
 """

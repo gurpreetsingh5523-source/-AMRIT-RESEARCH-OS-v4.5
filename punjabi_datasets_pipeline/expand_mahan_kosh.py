@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Mahan Kosh Expansion Script to reach 125+ authentic entries.
@@ -6,8 +7,9 @@ Mahan Kosh Expansion Script to reach 125+ authentic entries.
 import sys
 import os
 import json
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+base_dir = str(Path(__file__).resolve().parent)
 gen_file = os.path.join(base_dir, "generate_mahan_kosh_dataset.py")
 
 ADDITIONAL_ENTRIES = [

@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Production-Scale Punjabi Grammatical Error Correction (GEC) Generator
@@ -407,7 +408,7 @@ def generate_production_gec_dataset() -> List[Dict[str, Any]]:
     return dataset
 
 def main():
-    output_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    output_dir = str(Path(__file__).resolve().parent)
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "punjabi_grammar_correction_corpus.jsonl")
 

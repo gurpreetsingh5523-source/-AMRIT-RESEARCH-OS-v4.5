@@ -2,7 +2,7 @@
 
 system:
   name: "AMRIT RESEARCH OS"
-  version: "4.0"
+  version: "4.5"
   author: "Gurpreet Singh"
   log_level: "INFO"
   log_file: "logs/system.log"

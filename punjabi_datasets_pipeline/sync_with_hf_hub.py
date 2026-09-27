@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Direct Hugging Face Hub Dataset Sync using HfApi
@@ -13,7 +14,7 @@ def sync_datasets():
     token = open(token_path).read().strip() if os.path.exists(token_path) else ''
     api = HfApi(token=token)
 
-    base = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base = str(Path(__file__).resolve().parent)
 
     repos = [
         {

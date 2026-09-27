@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """
 Punjabi STEM Frontier CoT Corpus Expansion Script (from 50 to 125+ problems)
@@ -160,7 +161,7 @@ ADDITIONAL_STEM = [
 ]
 
 def append_stem_problems():
-    base_dir = "/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford/punjabi_datasets_pipeline"
+    base_dir = str(Path(__file__).resolve().parent)
     out_file = os.path.join(base_dir, "punjabi_stem_frontier_cot_corpus.jsonl")
 
     records = []

@@ -1,12 +1,18 @@
 import sys
+import os
 import json
-sys.path.append("/Users/gurpreetdhillon/Documents/antigravity/sharp-rutherford")
-from core.models.router import ModelRouter
+from pathlib import Path
 
-router = ModelRouter()
-client = router.client_for("deep_reasoning")
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-prompt = """
+def run_assessment():
+    from core.models.router import ModelRouter
+    router = ModelRouter()
+    client = router.client_for("deep_reasoning")
+
+    prompt = """
 Perform a deep, professional clinical research analysis on the following patient case:
 - Patient: 70-year-old female
 - Presenting Symptoms:
@@ -28,14 +34,18 @@ Structure the report into:
 Be extremely detailed, scientific, and professional. Return the response in Markdown.
 """
 
-print("Running deep clinical reasoning via Qwen 3.5...", flush=True)
-response = client.chat(prompt)
-print("\n=== SYSTEM RESPONSE ===\n")
-print(response)
+    print("Running deep clinical reasoning via Qwen 3.5...", flush=True)
+    response = client.chat(prompt)
+    print("\n=== SYSTEM RESPONSE ===\n")
+    print(response)
 
-# Save to reports/json and reports/pdf
-import os
-os.makedirs("reports/json", exist_ok=True)
-with open("reports/json/mother_clinical_analysis.json", "w") as f:
-    json.dump({"prompt": prompt, "analysis": response}, f, indent=4)
-print("\nReport saved successfully to reports/json/mother_clinical_analysis.json")
+    # Save to reports/json and reports/pdf
+    out_dir = ROOT / "reports" / "json"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_file = out_dir / "mother_clinical_analysis.json"
+    with open(out_file, "w") as f:
+        json.dump({"prompt": prompt, "analysis": response}, f, indent=4)
+    print(f"\nReport saved successfully to {out_file}")
+
+if __name__ == "__main__":
+    run_assessment()

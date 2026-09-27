@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AMRIT Omni-Omics Integrator v5.0
+AMRIT Omni-Omics Integrator v4.5
 7 omics layers, 12 biological pathways, 6 disease models
 """
 
@@ -31,6 +31,7 @@ class Pathway(Enum):
     INFLAMMATION = "inflammation"
     INSULIN_SIGNALING = "insulin_signaling"
     MTOR_SIGNALING = "mtor_signaling"
+    IMMUNE_RESPONSE = "immune_response"
 
 @dataclass
 class OmicsData:
