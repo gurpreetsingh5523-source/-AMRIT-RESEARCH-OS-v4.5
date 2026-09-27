@@ -12,8 +12,10 @@
 [![Ollama](https://img.shields.io/badge/Ollama-deepseek--coder--v2-purple?style=flat)](https://ollama.ai)
 [![TurboVec](https://img.shields.io/badge/Memory-TurboVec%20(TurboQuant)-FF6B00?style=flat)](https://pypi.org/project/turbovec/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat)](https://opensource.org/licenses/MIT)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Nam--toon--studio-FFD21E?style=flat&logo=huggingface&logoColor=black)](https://huggingface.co/Nam-toon-studio)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gurpreet%20Singh-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/feed/)
 
-*by Gurpreet Singh*
+*by [Gurpreet Singh](https://github.com/gurpreetsingh5523-source) · [Nam-toon Studio](https://huggingface.co/Nam-toon-studio)*
 
 </div>
 
@@ -24,6 +26,20 @@
 AMRIT is a fully autonomous research operating system that discovers, analyzes, debates, and publishes scientific hypotheses — powered by local AI (no cloud required).
 
 **Domains:** Physics · Biology · Mathematics · Astronomy · Chemistry · Neuroscience · Climate Science
+
+---
+
+## ☬ Sovereign Foundation Models & Datasets ([Hugging Face](https://huggingface.co/Nam-toon-studio))
+
+AMRIT Research OS links directly with our sovereign open-source models and datasets published under **[Nam-toon Studio](https://huggingface.co/Nam-toon-studio)** (1,300+ community downloads):
+
+| Model / Resource | Scale & Type | Technical Details & Benchmarks | Link |
+| :--- | :--- | :--- | :--- |
+| **Sahaj-86M** | 86M params · State Space Model / Causal LM | **🚀 Updated Model:** Sovereign Gurmukhi/Punjabi foundation model trained on high-density reasoning, STEM CoT, and philosophy corpora with BPE tokenization. Optimized for on-device inference. | [🤗 sahaj-86m](https://huggingface.co/Nam-toon-studio/sahaj-86m) |
+| **Sahaj-30M** | 30.6M params · Byte-Level Causal LM | **⚡ Updated Model:** Ultra-compact model achieving **0.149 Bits-Per-Byte (BPB)** with sub-millisecond edge latency (~115MB RAM). Ideal for Raspberry Pi / Robot Doctor. | [🤗 sahaj-30m](https://huggingface.co/Nam-toon-studio/sahaj-30m) |
+| **Punjabi TTS Voices** | Piper / VITS ONNX | Neural voice synthesis models providing authentic Gurmukhi speech output for AMRIT Voice Companion. | [🤗 punjabi-tts-voices](https://huggingface.co/Nam-toon-studio/punjabi-tts-voices) |
+| **Gurbani MahanKosh Corpus** | 20,000+ entries | Authoritative lexical dataset defining classical Gurmukhi etymology & Sikh philosophy. | [🤗 MahanKosh Corpus](https://huggingface.co/datasets/Nam-toon-studio/Gurbani-MahanKosh-Frontier-Corpus) |
+| **Punjabi STEM CoT Corpus** | Parquet | Deep multi-step reasoning in Gurmukhi across quantum physics, mathematics, and genetics. | [🤗 STEM CoT Corpus](https://huggingface.co/datasets/Nam-toon-studio/Punjabi-STEM-Frontier-CoT-Corpus) |
 
 ---
 
