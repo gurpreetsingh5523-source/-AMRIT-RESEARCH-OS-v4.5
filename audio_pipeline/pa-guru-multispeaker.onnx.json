@@ -1,0 +1,22 @@
+{
+  "audio": {
+    "sample_rate": 22050,
+    "quality": "high"
+  },
+  "espeak": {
+    "voice": "pa"
+  },
+  "language": {
+    "code": "pa",
+    "family": "indo-aryan",
+    "name": "Punjabi"
+  },
+  "num_speakers": 3,
+  "speaker_id_map": {
+    "spk1_male_orator": 0,
+    "spk2_male_literary": 1,
+    "spk3_female_broadcaster": 2
+  },
+  "dataset": "Nam-toon-studio/Punjabi-MultiSpeaker-Studio-TTS-Corpus",
+  "writer": "Gurpreet Singh (Nam-toon Studio)"
+}
