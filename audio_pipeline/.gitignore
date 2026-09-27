@@ -1,3 +1,5 @@
 *.wav
+*.onnx
 raw_cache/
 Punjabi-Conversational-Speech-Corpus/data/
+Punjabi-MultiSpeaker-Studio-TTS-Corpus/wavs/
