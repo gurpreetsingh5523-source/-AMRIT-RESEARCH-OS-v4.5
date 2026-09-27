@@ -39,3 +39,5 @@ reports/json/*
 
 # Separate sub-projects
 nam-toon-studio/
+*.pt
+audio_pipeline/amrit_voice_multispeaker.pt
