@@ -50,20 +50,42 @@ python3 audio_pipeline/youtube_punjabi_audio_pipeline.py \
   - Includes both `transcription` (100% human-verified, grammatically curated Gurmukhi) and `raw_transcription` (unprocessed CTC acoustic ASR output).
   - Speaker: Bhai Ranjit Singh (Dhadrianwale) on Mind-Body connection, health, and lifestyle.
 - **[Nam-toon-studio/Punjabi-MultiSpeaker-Studio-TTS-Corpus](https://huggingface.co/datasets/Nam-toon-studio/Punjabi-MultiSpeaker-Studio-TTS-Corpus)**:
-  - **145 high-fidelity studio clips** (22,050Hz mono, 22.8 minutes total audio).
-  - Multi-speaker voices: Bhai Ranjit Singh, Dr. Surjit Patar, BBC Punjabi Broadcaster.
+  - **217 high-fidelity studio clips** (22,050Hz mono, 33.2 minutes total audio).
+  - 4 Distinct Sovereign Speakers:
+    - `0`: **Bhai Ranjit Singh** (Male Orator / Conversational / Mind-Body) — 91 clips
+    - `1`: **Dr. Surjit Patar** (Male Literary / Classical Poetry) — 58 clips
+    - `2`: **BBC Punjabi Broadcaster** (Female Broadcaster / News) — 33 clips
+    - `3`: **Bilingual Tech Orator** (Bilingual AI & Science Discourse) — 35 clips
 
 ---
 
-### 🔊 Sovereign Punjabi Neural TTS (Text-to-Speech)
-- **Model on Hugging Face**: **[Nam-toon-studio/punjabi-tts-voices](https://huggingface.co/Nam-toon-studio/punjabi-tts-voices)**
-- **Architecture**: 114MB VITS Gurmukhi Neural Synthesis Engine (ONNX).
-- **Run & Play Punjabi Speech via Speakers**:
-```bash
-# Generate Punjabi speech and listen immediately:
-python3 audio_pipeline/test_and_play_tts.py --text "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ ਜੀ, ਅੰਮ੍ਰਿਤ ਰਿਸਰਚ ਓ.ਐਸ. ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ।"
+### 🎙️ AMRIT Multi-Speaker Bilingual Voice Engine (`amrit_voice_system.py`)
 
-# Download directly from Hugging Face Hub and play:
-python3 audio_pipeline/test_and_play_tts.py --download-hf --text "ਪੰਜਾਬੀ ਬੋਲਣ ਵਾਲਾ ਮਾਡਲ ਹੁਣ ਪੂਰੀ ਤਰ੍ਹਾਂ ਤਿਆਰ ਹੈ।"
+A sovereign, universal neural speech engine that anyone can run locally for pure Gurmukhi and code-mixed Punjabi-English text.
+
+#### 1. List Available Speakers
+```bash
+python3 audio_pipeline/amrit_voice_system.py --list-speakers
+```
+
+#### 2. Speak with Any Sovereign Voice
+```bash
+# Speaker 0: Bhai Ranjit Singh (Male Orator)
+python3 audio_pipeline/amrit_voice_system.py --speaker 0 --text "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ ਜੀ, ਤਨ ਤੇ ਮਨ ਦਾ ਗਹਿਰਾ ਸੰਬੰਧ ਹੈ।"
+
+# Speaker 1: Dr. Surjit Patar (Male Literary / Poet)
+python3 audio_pipeline/amrit_voice_system.py --speaker 1 --text "ਕੋਈ ਡਾਲੀਆਂ ਚੋਂ ਲੰਘਿਆ ਹਵਾ ਬਣ ਕੇ, ਅਸੀਂ ਰਹਿ ਗਏ ਕੁਲਾਂ ਦੇ ਪੈਰ ਚੁੰਮਦੇ।"
+
+# Speaker 2: BBC Punjabi (Female Broadcaster)
+python3 audio_pipeline/amrit_voice_system.py --speaker 2 --text "ਬੀ.ਬੀ.ਸੀ. ਪੰਜਾਬੀ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ, ਅੱਜ ਦੀਆਂ ਮੁੱਖ ਖ਼ਬਰਾਂ ਸੁਣੋ।"
+
+# Speaker 3: Bilingual Tech Orator (Punjabi + English AI)
+python3 audio_pipeline/amrit_voice_system.py --speaker 3 --text "ਅੰਮ੍ਰਿਤ ਰਿਸਰਚ ਓ.ਐਸ. ਵਿੱਚ ਆਰਟੀਫਿਸ਼ੀਅਲ ਇੰਟੈਲੀਜੈਂਸ ਅਤੇ ਕੰਪਿਊਟਰ ਸਾਇੰਸ ਦੀ ਬਿਹਤਰੀਨ ਟੈਕਨਾਲੋਜੀ ਹੈ।"
+```
+
+#### 3. Neural Model Training
+```bash
+# Train on Apple Silicon GPU (MPS) with your multi-speaker dataset:
+python3 audio_pipeline/train_amrit_voice_system.py --epochs 12 --batch-size 8
 ```
 
